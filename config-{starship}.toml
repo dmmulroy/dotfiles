@@ -1,0 +1,9 @@
+[directory]
+truncate_to_repo = false
+
+[gcloud]
+disabled = true
+
+[dotnet]
+# Remove project.json from detect_files to prevent nx projects from triggering this module
+detect_files = ["global.json", "Directory.Build.props", "Directory.Build.targets", "Packages.props"]
