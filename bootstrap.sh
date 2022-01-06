@@ -5,7 +5,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew update
 
 # Install fnm
-brew instal fnm
+brew install fnm
 
 # Install the most recent LTS Node version
 fnm install "$(fnm ls-remote | grep -E  "\(.+\)" | tail -1)"
