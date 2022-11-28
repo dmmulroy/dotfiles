@@ -35,6 +35,10 @@ nnoremap("n", "nzz")
 -- Press 'S' for quick find/replace
 nnoremap("S", ":%s//g<left><left>", {silent = false})
 
+-- Press 'H', 'L' to jump to start/end of a line (first/last char)
+nnoremap("<S-L>", "$")
+nnoremap("<S-H>", "^")
+
 -- Insert --
 -- Map jj to <esc>
 inoremap("jj", "<esc>")

@@ -21,3 +21,4 @@ vim.g.maplocalleader = " "
 -- Better splitting
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
