@@ -19,15 +19,15 @@ vim.opt.hlsearch = true
 vim.opt.wrap = false 
 
 -- Set leader key to space
-vim.g.mapleader = " " 
-vim.g.maplocalleader = " "
+vim.g.mapleader = ' ' 
+vim.g.maplocalleader = ' '
 
 -- Better splitting
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Enable mouse mode
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 
 -- Enable ignorecase + smartcase for better searching
 vim.opt.ignorecase = true
@@ -40,4 +40,13 @@ vim.opt.breakindent = true
 vim.opt.updatetime = 200
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.opt.completeopt = { "menuone", "noselect" }
+
+-- Enable persistent undo history
+vim.opt.undofile = true
+
+-- Enable 24-bit color
+vim.opt.termguicolors = true
+
+-- Enable the sign column to prevent the screen from jumping
+vim.opt.signcolumn = 'yes'
