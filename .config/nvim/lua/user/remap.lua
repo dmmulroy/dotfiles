@@ -25,7 +25,7 @@ nnoremap("<leader>q", "<cmd>q<cr>", {silent = false})
 nnoremap("<leader>e", "<cmd>Lex 20<cr>")
 
 -- Center buffer while navigating
-nnoremap("<C-u>", "<C-u>zz")
+nnoremap("<c-u>", "<c-u>zz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("{", "{zz")
 nnoremap("}", "}zz")
@@ -39,7 +39,7 @@ nnoremap("S", ":%s//g<left><left>", {silent = false})
 nnoremap("<S-L>", "$")
 nnoremap("<S-H>", "^")
 
--- Turn off highligted results
+-- Turn off highlighted results
 nnoremap("<leader>no", "<cmd>noh<cr>")
 
 -- Insert --
@@ -47,7 +47,9 @@ nnoremap("<leader>no", "<cmd>noh<cr>")
 inoremap("jj", "<esc>")
 
 -- Visual --
+-- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
+
 -- Move selected text up/down in visual mode (TODO: Figure out how to enable this for multi line) 
 -- vnoremap("<A-k>", "<cmd>m '<-2<CR>gv=gv") 
 -- vnoremap("<A-j>", "<cmd>m '>+1<CR>gv=gv")

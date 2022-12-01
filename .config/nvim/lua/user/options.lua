@@ -1,5 +1,6 @@
-vim.opt.nu = true -- Enable line numbers
-vim.opt.rnu = true -- Enable relative line numbers
+-- Enable relative line numbers
+vim.opt.nu = true 
+vim.opt.rnu = true 
 
 -- Set tabs to 2 spaces
 vim.opt.tabstop = 2 
@@ -10,9 +11,12 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.shiftwidth = 2 
 
-vim.opt.incsearch = true -- Enable incremental searching
+-- Enable incremental searching
+vim.opt.incsearch = true 
+vim.opt.hlsearch = true
 
-vim.opt.wrap = false -- Disable text wrap
+-- Disable text wrap
+vim.opt.wrap = false 
 
 -- Set leader key to space
 vim.g.mapleader = " " 
@@ -22,3 +26,18 @@ vim.g.maplocalleader = " "
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Enable mouse mode
+vim.opt.mouse = "a"
+
+-- Enable ignorecase + smartcase for better searching
+vim.opt.ignorecase = true
+vim.opt.smartcase = true 
+
+-- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
+vim.opt.breakindent = true
+
+-- Decrease updatetime to 200ms
+vim.opt.updatetime = 200
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'

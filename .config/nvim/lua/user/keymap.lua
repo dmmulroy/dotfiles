@@ -1,3 +1,5 @@
+local M = {}
+
 local function bind(op, outer_opts)
   outer_opts = outer_opts or {noremap = true, silent = true}
   return function (lhs, rhs, opts)
@@ -6,13 +8,11 @@ local function bind(op, outer_opts)
   end
 end
 
-local keymapFns = {}
+M.map = bind("")
+M.nmap = bind("n", {noremap = false})
+M.nnoremap = bind("n")
+M.vnoremap = bind("v")
+M.xnoremap = bind("x")
+M.inoremap = bind("i")
 
-keymapFns.map = bind("")
-keymapFns.nmap = bind("n", {noremap = false})
-keymapFns.nnoremap = bind("n")
-keymapFns.vnoremap = bind("v")
-keymapFns.xnoremap = bind("x")
-keymapFns.inoremap = bind("i")
-
-return keymapFns
+return M
