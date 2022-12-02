@@ -45,6 +45,7 @@ nnoremap("<leader>no", "<cmd>noh<cr>")
 -- Insert --
 -- Map jj to <esc>
 inoremap("jj", "<esc>")
+-- TODO: Test use Caps Lock as <esc>
 
 -- Visual --
 -- Paste without losing the contents of the register
