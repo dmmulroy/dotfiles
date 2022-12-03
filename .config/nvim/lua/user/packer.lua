@@ -48,7 +48,8 @@ packer.startup(function(use)
   -- Install gitsigns for git decorations/indicators
   use("lewis6991/gitsigns.nvim")
 
-
+  -- Install Comment to enable easy/quick (un)commenting
+  use("numToStr/Comment.nvim")
 
   -- Interactive games for learning vim
   use("ThePrimeagen/vim-be-good")
