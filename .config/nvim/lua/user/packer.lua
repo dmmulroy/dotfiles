@@ -11,7 +11,7 @@ end
 
 -- Set up an autocmd to automatically run PackerCompile on updates to this file
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
+  command = 'source <afile> | PackerSync',
   group = vim.api.nvim_create_augroup("recompile_packer", { clear = true}),
   pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua"
 })
@@ -26,20 +26,13 @@ require("packer").startup({function(use)
   -- Install treesitter
   use({ 
     "nvim-treesitter/nvim-treesitter",
-    run = function()
-      pcall(require("nvim-treesitter.install").update({ with_sync = true}))
-    end,
+    run = ":TSUpdate", 
   })
 
   if is_bootstrapped then
     require("packer").sync()
   end
 end,
-config = {
-  display = {
-    open_fn = require("packer.util").float,
-    }
-  }
 })
 
 
