@@ -6,7 +6,7 @@ local is_bootstrapped = false
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
   is_bootstrapped = true
   vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_path)
-  vim.cmd([[packadd packer.nvim]])
+  vim.cmd.packadd("packer.nvim")
 end
 
 -- Set up an autocmd to automatically run PackerCompile on updates to this file
@@ -31,12 +31,6 @@ require("packer").startup({function(use)
     end,
   })
 
-  -- Install additional text object for treesitter
-  use({ 
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    after = "nvim-treesitter"
-  })
-
   if is_bootstrapped then
     require("packer").sync()
   end
@@ -47,4 +41,6 @@ config = {
     }
   }
 })
+
+
 
