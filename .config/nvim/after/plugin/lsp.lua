@@ -7,9 +7,11 @@ local on_attach = function(_, buffer_num)
 
   nmap('gd', vim.lsp.buf.definition, { desc = 'LSP: [G]oto [D]efinition', buffer = buffer_num })
   nmap('gi', vim.lsp.buf.implementation, { desc = 'LSP: [G]oto [I]mplementation', buffer = buffer_num })
---  nmap('gr', require('telescope.builtin').lsp_references, { desc = 'LSP: [G]oto [R]eferences', buffer = buffer_num })
---  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = 'LSP: [D]ocument [S]ymbols', buffer = buffer_num })
---  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = 'LSP: [W]orkspace [S]ymbols', buffer = buffer_num })
+
+  --  TODO: Uncomment after installing/configuring telescope
+  --  nmap('gr', require('telescope.builtin').lsp_references, { desc = 'LSP: [G]oto [R]eferences', buffer = buffer_num })
+  --  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = 'LSP: [D]ocument [S]ymbols', buffer = buffer_num })
+  --  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = 'LSP: [W]orkspace [S]ymbols', buffer = buffer_num })
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation', buffer = buffer_num })
@@ -20,7 +22,9 @@ local on_attach = function(_, buffer_num)
   nmap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition', buffer = buffer_num })
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'LSP: [W]orkspace [A]dd Folder', buffer = buffer_num })
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'LSP: [W]orkspace [R]emove Folder', buffer = buffer_num })
-
+  nmap('<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, { desc = 'LSP: [W]orkspace [L]ist Folders', buffer = buffer_num })
 end
 
 
