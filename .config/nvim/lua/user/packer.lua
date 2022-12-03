@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua"
 
 })
+
 local packer = require("packer")
 
 -- Packer configuration
@@ -42,6 +43,29 @@ packer.startup(function(use)
     run = ":TSUpdate", 
   })
 
+  -- Install LSP
+  use({
+    "neovim/nvim-lspconfig",
+    requires = {
+      -- Tool/Dependency to automatically install LSPs to stdpath
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+
+      -- Progress/Status update for LSP
+      "j-hui/fidget.nvim",
+    }
+  })
+
+  -- Install Autocomplete dependencies
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip'
+    }
+  })
+   
   -- Install lualine for a better status line
   use("nvim-lualine/lualine.nvim")
 
