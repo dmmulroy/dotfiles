@@ -75,6 +75,9 @@ packer.startup(function(use)
   -- Install Comment to enable easy/quick (un)commenting
   use("numToStr/Comment.nvim")
 
+  -- Install indent_blankline to style indentation
+  use("lukas-reineke/indent-blankline.nvim")
+
   -- Interactive games for learning vim
   use("ThePrimeagen/vim-be-good")
   
