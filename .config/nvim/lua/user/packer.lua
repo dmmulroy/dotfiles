@@ -11,29 +11,52 @@ end
 
 -- Set up an autocmd to automatically run PackerCompile on updates to this file
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerSync',
+  command = 'source <afile> | PackerCompile',
   group = vim.api.nvim_create_augroup("recompile_packer", { clear = true}),
   pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua"
-})
 
-require("packer").startup({function(use)
+})
+local packer = require("packer")
+
+-- Packer configuration
+local conf = {
+  display = {
+    open_fn = function() 
+      return require("packer.util").float({ border = "rounded" })
+    end,
+  },
+}
+
+packer.init(conf)
+
+packer.startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
   -- Install the catppuccin theme
   use({ "catppuccin/nvim", as = "catppuccin" })
 
-  -- Install treesitter
+  -- Install treesitter for better syntax highlighting
   use({ 
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate", 
   })
 
+  -- Install lualine for a better status line
+  use("nvim-lualine/lualine.nvim")
+
+  -- Install gitsigns for git decorations/indicators
+  use("lewis6991/gitsigns.nvim")
+
+
+
+  -- Interactive games for learning vim
+  use("ThePrimeagen/vim-be-good")
+  
   if is_bootstrapped then
     require("packer").sync()
   end
-end,
-})
+end)
 
 
 

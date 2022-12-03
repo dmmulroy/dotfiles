@@ -24,6 +24,9 @@ nnoremap("<leader>q", "<cmd>q<cr>", {silent = false})
 -- Map netrw to <leader>e
 nnoremap("<leader>e", "<cmd>Lex 20<cr>")
 
+-- Map netrw to <leader>e
+nnoremap("<leader>r", "<cmd>Rex<cr>")
+
 -- Center buffer while navigating
 nnoremap("<c-u>", "<c-u>zz")
 nnoremap("<C-d>", "<C-d>zz")
@@ -51,7 +54,7 @@ inoremap("jj", "<esc>")
 -- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
 
--- Move selected text up/down in visual mode (TODO: Figure out how to enable this for multi line) 
--- vnoremap("<A-k>", "<cmd>m '<-2<CR>gv=gv") 
--- vnoremap("<A-j>", "<cmd>m '>+1<CR>gv=gv")
+-- Move selected text up/down in visual mode (TODO: this does not work well, find another solution) 
+-- vnoremap("<A-j>", "<cmd>m '>+1<cr>gv=gv")
+-- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv") 
 

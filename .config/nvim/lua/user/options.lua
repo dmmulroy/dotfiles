@@ -50,3 +50,6 @@ vim.opt.termguicolors = true
 
 -- Enable the sign column to prevent the screen from jumping
 vim.opt.signcolumn = 'yes'
+
+-- Enable access to System Clipboard
+vim.opt.clipboard = "unnamedplus" 
