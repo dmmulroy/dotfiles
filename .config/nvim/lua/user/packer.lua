@@ -12,7 +12,7 @@ end
 -- Set up an autocmd to automatically run PackerCompile on updates to this file
 vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'source <afile> | PackerCompile',
-  group = vim.api.nvim_create_augroup("recompile_packer", { clear = true}),
+  group = vim.api.nvim_create_augroup("recompile_packer", { clear = true }),
   pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua",
 })
 
@@ -65,6 +65,25 @@ packer.startup(function(use)
     }
   })
 
+  -- Install telescope
+  use({
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    }
+  })
+
+  -- Install fuzzy finder for telescope
+  use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+    cond = vim.fn.executable("make") == 1
+  })
+
+  -- Install dressing to enable neovim core vim.ui.select to use telescope
+  use("stevearc/dressing.nvim")
+
   -- Install lualine for a better status line
   use("nvim-lualine/lualine.nvim")
 
@@ -84,6 +103,3 @@ packer.startup(function(use)
     require("packer").sync()
   end
 end)
-
-
-

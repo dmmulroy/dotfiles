@@ -1,4 +1,5 @@
 local nnoremap = require("user.keymap_utils").nnoremap
+local vnoremap = require("user.keymap_utils").vnoremap
 local inoremap = require("user.keymap_utils").inoremap
 local xnoremap = require("user.keymap_utils").xnoremap
 local nmap = require("user.keymap_utils").nmap
@@ -58,6 +59,9 @@ inoremap("jj", "<esc>")
 -- TODO: Test use Caps Lock as <esc>
 
 -- Visual --
+-- Disable Space bar since it'll be used as the leader key
+vnoremap("<space>", "<nop>")
+
 -- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
 
