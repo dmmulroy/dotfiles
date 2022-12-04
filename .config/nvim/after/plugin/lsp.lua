@@ -21,7 +21,8 @@ local on_attach = function(_, buffer_number)
   nmap('gD', vim.lsp.buf.declaration, { desc = 'LSP: [G]oto [D]eclaration', buffer = buffer_number })
   nmap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition', buffer = buffer_number })
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'LSP: [W]orkspace [A]dd Folder', buffer = buffer_number })
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'LSP: [W]orkspace [R]emove Folder', buffer = buffer_number })
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder,
+    { desc = 'LSP: [W]orkspace [R]emove Folder', buffer = buffer_number })
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, { desc = 'LSP: [W]orkspace [L]ist Folders', buffer = buffer_number })
@@ -46,12 +47,12 @@ local servers = {
   "graphql",
   "jsonls",
   "marksman",
-  "ocamllsp",
   "prismals",
   "sqlls",
   "tailwindcss",
   "bashls",
-  "yamlls"
+  "yamlls",
+  "sumneko_lua"
 }
 
 -- Install the above servers
@@ -75,8 +76,51 @@ end
 -- Turn on LSP status and progress information
 require("fidget").setup()
 
--- Manually configure the Lua LSP to include neovim globals/runtime
--- TODO: Move this to another module/file
+-- nvim-cmp setup for auto completion
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+})
+
+-- Manual LSP Server Overrides --
+-- Lua
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')

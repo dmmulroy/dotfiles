@@ -13,8 +13,7 @@ end
 vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'source <afile> | PackerCompile',
   group = vim.api.nvim_create_augroup("recompile_packer", { clear = true}),
-  pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua"
-
+  pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua",
 })
 
 local packer = require("packer")
@@ -22,7 +21,7 @@ local packer = require("packer")
 -- Packer configuration
 local conf = {
   display = {
-    open_fn = function() 
+    open_fn = function()
       return require("packer.util").float({ border = "rounded" })
     end,
   },
@@ -38,9 +37,9 @@ packer.startup(function(use)
   use({ "catppuccin/nvim", as = "catppuccin" })
 
   -- Install treesitter for better syntax highlighting
-  use({ 
+  use({
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate", 
+    run = ":TSUpdate",
   })
 
   -- Install LSP
@@ -65,7 +64,7 @@ packer.startup(function(use)
       'saadparwaiz1/cmp_luasnip'
     }
   })
-   
+
   -- Install lualine for a better status line
   use("nvim-lualine/lualine.nvim")
 
@@ -80,7 +79,7 @@ packer.startup(function(use)
 
   -- Interactive games for learning vim
   use("ThePrimeagen/vim-be-good")
-  
+
   if is_bootstrapped then
     require("packer").sync()
   end
