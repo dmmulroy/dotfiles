@@ -11,7 +11,7 @@ local on_attach = function(_, buffer_number)
   nmap('gr', require('telescope.builtin').lsp_references, { desc = 'LSP: [G]oto [R]eferences', buffer = buffer_number })
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
     { desc = 'LSP: [D]ocument [S]ymbols', buffer = buffer_number })
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+  nmap('<leader>ws', require('telescope.builtin').lsp_workspace_symbols,
     { desc = 'LSP: [W]orkspace [S]ymbols', buffer = buffer_number })
 
   -- See `:help K` for why this keymap

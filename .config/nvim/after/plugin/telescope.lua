@@ -19,9 +19,24 @@ nmap('<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H
 nmap('<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 nmap('<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 nmap('<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-nmap('<leader>/', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+
+nmap('<leader>sc', function()
+  require('telescope.builtin').commands(require("telescope.themes").get_dropdown({
     winblend = 10,
     previewer = false,
-  })
+  }))
+end, { desc = '[S]earch [C]ommands' })
+
+nmap('<leader>/', function()
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+    winblend = 10,
+    previewer = false,
+  }))
 end, { desc = '[/] Fuzzily search in current buffer]' })
+
+nmap('<leader>ss', function()
+  require('telescope.builtin').spell_suggest(require("telescope.themes").get_dropdown({
+    winblend = 10,
+    previewer = false,
+  }))
+end, { desc = '[S]earch [S]pelling suggestions' })
