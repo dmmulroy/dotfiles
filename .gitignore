@@ -1,2 +1,5 @@
 # Ignore compiled nvim plugins
 .config/nvim/plugin
+
+# Ignore lua lsp generated config
+.luarc.json
