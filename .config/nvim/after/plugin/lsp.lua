@@ -42,7 +42,6 @@ require("mason").setup()
 -- LSPs to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
   "tsserver",
-  "sumneko_lua",
   "cssls",
   "graphql",
   "jsonls",
@@ -76,7 +75,7 @@ end
 -- Turn on LSP status and progress information
 require("fidget").setup()
 
--- Override default Lua LSP to include neovim globals/runtime
+-- Manually configure the Lua LSP to include neovim globals/runtime
 -- TODO: Move this to another module/file
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
@@ -102,3 +101,4 @@ require('lspconfig').sumneko_lua.setup({
     },
   },
 })
+

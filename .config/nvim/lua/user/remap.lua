@@ -1,11 +1,12 @@
 local nnoremap = require("user.keymap").nnoremap
 local inoremap = require("user.keymap").inoremap
-local vnoremap = require("user.keymap").vnoremap
 local xnoremap = require("user.keymap").xnoremap
-local map = require("user.keymap").map
 local nmap = require("user.keymap").nmap
 
 -- Normal --
+-- Disable Space bar since it'll be used as the leader key
+nnoremap("<space>", "<nop>")
+
 -- Window navigation
 nnoremap("<C-j>", "<C-w>j")
 nnoremap("<C-k>", "<C-w>k")
@@ -23,10 +24,7 @@ nnoremap("<leader>w", "<cmd>w<cr>", {silent = false})
 nnoremap("<leader>q", "<cmd>q<cr>", {silent = false})
 
 -- Map netrw to <leader>e
-nnoremap("<leader>e", "<cmd>Lex 20<cr>")
-
--- Map netrw to <leader>e
-nnoremap("<leader>r", "<cmd>Rex<cr>")
+nnoremap("<leader>e", "<cmd>Rex<cr>")
 
 -- Center buffer while navigating
 nnoremap("<c-u>", "<c-u>zz")
@@ -66,24 +64,3 @@ xnoremap("<leader>p", '"_dP')
 -- Move selected text up/down in visual mode (TODO: this does not work well, find another solution) 
 -- vnoremap("<A-j>", "<cmd>m '>+1<cr>gv=gv")
 -- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv") 
-
-
-
--- nmap('<leader>rn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame' })
--- nmap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction' })
---
--- nmap('gd', vim.lsp.buf.definition, { desc = 'LSP: [G]oto [D]efinition' })
--- nmap('gi', vim.lsp.buf.implementation, { desc = 'LSP: [G]oto [I]mplementation' })
--- nmap('gr', require('telescope.builtin').lsp_references, { desc = 'LSP: [G]oto [R]eferences' })
--- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = 'LSP: [D]ocument [S]ymbols' })
--- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = 'LSP: [W]orkspace [S]ymbols' })
---
--- -- See `:help K` for why this keymap
--- nmap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation' })
--- nmap('<C-k>', vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation' })
---
--- -- Lesser used LSP functionality
--- nmap('gD', vim.lsp.buf.declaration, { desc = 'LSP: [G]oto [D]eclaration' })
--- nmap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition' })
--- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'LSP: [W]orkspace [A]dd Folder' })
--- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'LSP: [W]orkspace [R]emove Folder' })
