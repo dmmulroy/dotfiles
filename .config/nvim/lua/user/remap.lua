@@ -35,6 +35,8 @@ nnoremap("{", "{zz")
 nnoremap("}", "}zz")
 nnoremap("N", "Nzz")
 nnoremap("n", "nzz")
+nnoremap("G", "Gzz")
+nnoremap("gg", "ggzz")
 
 -- Press 'S' for quick find/replace
 nnoremap("S", ":%s//g<left><left>", {silent = false})

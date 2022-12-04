@@ -13,6 +13,7 @@ require("nvim-treesitter.configs").setup({
     "vim",
     "graphql",
     "help",
+    "bash"
   },
   sync_install = false,
   highlight = {
