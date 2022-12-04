@@ -1,5 +1,4 @@
-local nmap = require("user.keymap").nmap
-
+local nmap = require("user.keymap_utils").nmap
 
 local on_attach = function(_, buffer_number)
   nmap('<leader>rn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame', buffer = buffer_number })
@@ -145,4 +144,3 @@ require('lspconfig').sumneko_lua.setup({
     },
   },
 })
-

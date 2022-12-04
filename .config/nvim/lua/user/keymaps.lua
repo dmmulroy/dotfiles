@@ -1,7 +1,7 @@
-local nnoremap = require("user.keymap").nnoremap
-local inoremap = require("user.keymap").inoremap
-local xnoremap = require("user.keymap").xnoremap
-local nmap = require("user.keymap").nmap
+local nnoremap = require("user.keymap_utils").nnoremap
+local inoremap = require("user.keymap_utils").inoremap
+local xnoremap = require("user.keymap_utils").xnoremap
+local nmap = require("user.keymap_utils").nmap
 
 -- Normal --
 -- Disable Space bar since it'll be used as the leader key
@@ -18,10 +18,10 @@ nnoremap("<A-l>", "<cmd>bnext<cr>")
 nnoremap("<A-h>", "<cmd>bprevious<cr>")
 
 -- Save with leader key
-nnoremap("<leader>w", "<cmd>w<cr>", {silent = false})
+nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
 
 -- Quit with leader key
-nnoremap("<leader>q", "<cmd>q<cr>", {silent = false})
+nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 
 -- Map netrw to <leader>e
 nnoremap("<leader>e", "<cmd>Rex<cr>")
@@ -37,7 +37,7 @@ nnoremap("G", "Gzz")
 nnoremap("gg", "ggzz")
 
 -- Press 'S' for quick find/replace
-nnoremap("S", ":%s//g<left><left>", {silent = false})
+nnoremap("S", ":%s//g<left><left>", { silent = false })
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 nnoremap("<S-L>", "$")
@@ -61,6 +61,6 @@ inoremap("jj", "<esc>")
 -- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
 
--- Move selected text up/down in visual mode (TODO: this does not work well, find another solution) 
+-- Move selected text up/down in visual mode (TODO: this does not work well, find another solution)
 -- vnoremap("<A-j>", "<cmd>m '>+1<cr>gv=gv")
--- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv") 
+-- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv")
