@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { 
+  ensure_installed = {
     "lua",
     "javascript",
     "typescript",
@@ -22,5 +22,7 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
   },
+  autopairs = {
+    enable = true,
+  },
 })
-

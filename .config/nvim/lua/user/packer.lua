@@ -96,6 +96,18 @@ packer.startup(function(use)
   -- Install indent_blankline to style indentation
   use("lukas-reineke/indent-blankline.nvim")
 
+  -- Install nvim-autopairs to auto close brackets & tags
+  use("windwp/nvim-autopairs")
+
+  -- Install nvim-tree for a vscode-like file tree/explorer
+  use({
+    "nvim-tree/nvim-tree.lua",
+    requires = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    tag = "nightly"
+  })
+
   -- Interactive games for learning vim
   use("ThePrimeagen/vim-be-good")
 

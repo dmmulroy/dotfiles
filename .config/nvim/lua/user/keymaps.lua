@@ -25,7 +25,7 @@ nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
 nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 
 -- Map netrw to <leader>e
-nnoremap("<leader>e", "<cmd>Rex<cr>")
+nnoremap("<leader>e", "<cmd>NvimTreeToggle<cr>")
 
 -- Center buffer while navigating
 nnoremap("<c-u>", "<c-u>zz")
