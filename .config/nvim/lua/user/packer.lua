@@ -108,6 +108,9 @@ packer.startup(function(use)
     tag = "nightly"
   })
 
+  -- Install vim-tmux-navigator to have integration between nvim and tmux window nav
+  use("christoomey/vim-tmux-navigator")
+
   -- Interactive games for learning vim
   use("ThePrimeagen/vim-be-good")
 
