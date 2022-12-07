@@ -3,3 +3,6 @@
 
 # Ignore lua lsp generated config
 .luarc.json
+
+# Ignore tmux plugins
+.confg/tmux/plugins

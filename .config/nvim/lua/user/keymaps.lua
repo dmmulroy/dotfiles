@@ -24,6 +24,9 @@ nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
 -- Quit with leader key
 nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 
+-- Save and Quit with leader key
+nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
+
 -- Map netrw to <leader>e
 nnoremap("<leader>e", "<cmd>NvimTreeToggle<cr>")
 
@@ -36,6 +39,8 @@ nnoremap("N", "Nzz")
 nnoremap("n", "nzz")
 nnoremap("G", "Gzz")
 nnoremap("gg", "ggzz")
+nnoremap("<C-i>", "<C-i>zz")
+nnoremap("<C-o>", "<C-o>zz")
 
 -- Press 'S' for quick find/replace
 nnoremap("S", ":%s//g<left><left>", { silent = false })
