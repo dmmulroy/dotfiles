@@ -5,4 +5,4 @@
 .luarc.json
 
 # Ignore tmux plugins
-.confg/tmux/plugins
+.config/tmux/plugins
