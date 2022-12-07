@@ -53,3 +53,11 @@ vim.opt.signcolumn = 'yes'
 
 -- Enable access to System Clipboard
 vim.opt.clipboard = "unnamed,unnamedplus"
+
+-- Enable cursor line highlight
+vim.opt.cursorline = true
+
+-- Enable floating window popup menu for completion on command line
+vim.opt.pumblend = 17
+vim.opt.wildmode = "longest:full"
+vim.opt.wildoptions = "pum"
