@@ -122,6 +122,9 @@ packer.startup(function(use)
 	-- Install vim-surround for managing parenthese, brackets, quotes, etc
 	use("tpope/vim-surround")
 
+	-- Install maximizer as a depedency to easily toggle max/min a split buffer
+	use("szw/vim-maximizer")
+
 	-- Interactive games for learning vim
 	use("ThePrimeagen/vim-be-good")
 

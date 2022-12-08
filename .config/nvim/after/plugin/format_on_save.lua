@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		local ok, _ = pcall(vim.cmd.Format)
 
 		if not ok then
-			vim.lsp.buf.formatting_seq_sync()
+			vim.lsp.buf.format()
 		end
 	end,
 })

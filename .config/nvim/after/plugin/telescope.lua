@@ -2,50 +2,51 @@ local actions = require("telescope.actions")
 local nmap = require("user.keymap_utils").nmap
 
 require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-k>"] = actions.move_selection_previous,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-      }
-    },
-    file_ignore_patterns = {
-      "node_modules",
-      "yarn.lock"
-    },
-  },
+	defaults = {
+		mappings = {
+			i = {
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+				["<C-x>"] = actions.delete_buffer,
+			},
+		},
+		file_ignore_patterns = {
+			"node_modules",
+			"yarn.lock",
+		},
+	},
 })
 
 -- Enable telescope fzf native, if installed
 pcall(require("telescope").load_extension, "fzf")
 
 -- telescope keybinds
-nmap('<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-nmap('<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-nmap('<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-nmap('<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-nmap('<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-nmap('<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-nmap('<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+nmap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
+nmap("<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
+nmap("<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
+nmap("<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
+nmap("<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
+nmap("<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
+nmap("<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 
-nmap('<leader>sc', function()
-  require('telescope.builtin').commands(require("telescope.themes").get_dropdown({
-    winblend = 10,
-    previewer = false,
-  }))
-end, { desc = '[S]earch [C]ommands' })
+nmap("<leader>sc", function()
+	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[S]earch [C]ommands" })
 
-nmap('<leader>/', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-    winblend = 10,
-    previewer = false,
-  }))
-end, { desc = '[/] Fuzzily search in current buffer]' })
+nmap("<leader>/", function()
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer]" })
 
-nmap('<leader>ss', function()
-  require('telescope.builtin').spell_suggest(require("telescope.themes").get_dropdown({
-    winblend = 10,
-    previewer = false,
-  }))
-end, { desc = '[S]earch [S]pelling suggestions' })
+nmap("<leader>ss", function()
+	require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[S]earch [S]pelling suggestions" })

@@ -59,19 +59,24 @@ nnoremap("<S-H>", "^")
 nnoremap("<leader>no", "<cmd>noh<cr>")
 
 -- Diagnostics
-nmap('[d', vim.diagnostic.goto_prev)
-nmap(']d', vim.diagnostic.goto_next)
-nmap('<leader>d', vim.diagnostic.open_float)
-nmap('<leader>dq', vim.diagnostic.setloclist)
+nmap("[d", vim.diagnostic.goto_prev)
+nmap("]d", vim.diagnostic.goto_next)
+nmap("<leader>d", vim.diagnostic.open_float)
+nmap("<leader>dq", vim.diagnostic.setloclist)
 
 -- Increment/Decrement numbers w/ leader key
 nnoremap("<leader>+", "<C-a>")
 nnoremap("<leader>-", "<C-x>")
 
+-- Map MaximizerToggle (szw/vim-maximizer) to leader-m
+nnoremap("<leader>m", ":MaximizerToggle<cr>")
+
+-- Rezie split windows to be equal size
+nnoremap("<leader>=", "<C-w>=")
+
 -- Insert --
 -- Map jj to <esc>
 inoremap("jj", "<esc>")
--- TODO: Test use Caps Lock as <esc>
 
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key
