@@ -18,6 +18,12 @@ nnoremap("<C-h>", "<C-w>h")
 nnoremap("<A-l>", "<cmd>bnext<cr>")
 nnoremap("<A-h>", "<cmd>bprevious<cr>")
 
+-- Tab navigation
+nnoremap("<leader>to", ":tabnew<CR>") -- open new tab
+nnoremap("<leader>tx", ":tabclose<CR>") -- close current tab
+nnoremap("<leader>tn", ":tabn<CR>") --  go to next tab
+nnoremap("<leader>tp", ":tabp<CR>") --  go to previous tab
+
 -- Save with leader key
 nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
 
@@ -57,6 +63,10 @@ nmap('[d', vim.diagnostic.goto_prev)
 nmap(']d', vim.diagnostic.goto_next)
 nmap('<leader>d', vim.diagnostic.open_float)
 nmap('<leader>dq', vim.diagnostic.setloclist)
+
+-- Increment/Decrement numbers w/ leader key
+nnoremap("<leader>+", "<C-a>")
+nnoremap("<leader>-", "<C-x>")
 
 -- Insert --
 -- Map jj to <esc>

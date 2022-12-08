@@ -2,7 +2,7 @@ local packer_install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/p
 
 local is_bootstrapped = false
 
--- If packer hasn't previously been installed, git clone and install it
+-- If packer hasn"t previously been installed, git clone and install it
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
   is_bootstrapped = true
   vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_path)
@@ -10,8 +10,8 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
 end
 
 -- Set up an autocmd to automatically run PackerCompile on updates to this file
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerSync",
   group = vim.api.nvim_create_augroup("recompile_packer", { clear = true }),
   pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua",
 })
@@ -59,9 +59,13 @@ packer.startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     requires = {
-      'hrsh7th/cmp-nvim-lsp',
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip'
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+      "onsails/lspkind.nvim",
     }
   })
 
@@ -80,9 +84,6 @@ packer.startup(function(use)
     run = "make",
     cond = vim.fn.executable("make") == 1
   })
-
-  -- Install dressing to enable neovim core vim.ui.select to use telescope
-  use("stevearc/dressing.nvim")
 
   -- Install lualine for a better status line
   use("nvim-lualine/lualine.nvim")
@@ -110,6 +111,10 @@ packer.startup(function(use)
 
   -- Install vim-tmux-navigator to have integration between nvim and tmux window nav
   use("christoomey/vim-tmux-navigator")
+
+  -- Install vim-surround for managing parenthese, brackets, quotes, etc
+  use("tpope/vim-surround")
+
 
   -- Interactive games for learning vim
   use("ThePrimeagen/vim-be-good")
