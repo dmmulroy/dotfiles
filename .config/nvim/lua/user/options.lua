@@ -19,15 +19,15 @@ vim.opt.hlsearch = true
 vim.opt.wrap = false
 
 -- Set leader key to space
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Better splitting
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Enable mouse mode
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
 -- Enable ignorecase + smartcase for better searching
 vim.opt.ignorecase = true
@@ -49,7 +49,7 @@ vim.opt.undofile = true
 vim.opt.termguicolors = true
 
 -- Enable the sign column to prevent the screen from jumping
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
 -- Enable access to System Clipboard
 vim.opt.clipboard = "unnamed,unnamedplus"
@@ -57,7 +57,12 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 -- Enable cursor line highlight
 vim.opt.cursorline = true
 
+-- Set fold settings
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 20
+
 -- Enable floating window popup menu for completion on command line
-vim.opt.pumblend = 17
-vim.opt.wildmode = "longest:full"
-vim.opt.wildoptions = "pum"
+-- vim.opt.pumblend = 17
+-- vim.opt.wildmode = "longest:full"
+-- vim.opt.wildoptions = "pum"

@@ -26,24 +26,11 @@ local on_attach = function(_, buffer_number)
 
 	-- See `:help K` for why this keymap
 	nmap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
-	nmap("<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
+	nmap("<leader>k", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
 
 	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
 	nmap("<leader>D", vim.lsp.buf.type_definition, { desc = "LSP: Type [D]efinition", buffer = buffer_number })
-	nmap(
-		"<leader>wa",
-		vim.lsp.buf.add_workspace_folder,
-		{ desc = "LSP: [W]orkspace [A]dd Folder", buffer = buffer_number }
-	)
-	nmap(
-		"<leader>wr",
-		vim.lsp.buf.remove_workspace_folder,
-		{ desc = "LSP: [W]orkspace [R]emove Folder", buffer = buffer_number }
-	)
-	nmap("<leader>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, { desc = "LSP: [W]orkspace [L]ist Folders", buffer = buffer_number })
 
 	-- Create a command `:Format` local to the LSP buffer
 	vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
@@ -99,7 +86,7 @@ end
 local mason_null_ls = require("mason-null-ls")
 local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
+-- local diagnostics = null_ls.builtins.diagnostics
 
 -- Install linters and formatters
 mason_null_ls.setup({
@@ -114,7 +101,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettier,
 		formatting.stylua,
-		diagnostics.eslint_d,
+		-- diagnostics.eslint_d,
 	},
 })
 

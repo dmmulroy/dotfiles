@@ -3,6 +3,8 @@ local vnoremap = require("user.keymap_utils").vnoremap
 local inoremap = require("user.keymap_utils").inoremap
 local xnoremap = require("user.keymap_utils").xnoremap
 local nmap = require("user.keymap_utils").nmap
+local harpoon_ui = require("harpoon.ui")
+local harpoon_mark = require("harpoon.mark")
 
 -- Normal --
 -- Disable Space bar since it'll be used as the leader key
@@ -34,7 +36,7 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
 -- Map netrw to <leader>e
-nnoremap("<leader>e", "<cmd>NvimTreeToggle<cr>")
+nnoremap("<leader>e", "<cmd>NvimTreeFindFileToggle<cr>")
 
 -- Center buffer while navigating
 nnoremap("<c-u>", "<c-u>zz")
@@ -73,6 +75,54 @@ nnoremap("<leader>m", ":MaximizerToggle<cr>")
 
 -- Rezie split windows to be equal size
 nnoremap("<leader>=", "<C-w>=")
+
+-- Press leader f to format
+nnoremap("<leader>f", ":Format<cr>")
+
+-- Harpoon keybinds --
+-- Open harpoon ui
+nnoremap("<leader>ho", function()
+	harpoon_ui.toggle_quick_menu()
+end)
+
+-- Add current file to harpoon
+nnoremap("<leader>ha", function()
+	harpoon_mark.add_file()
+end)
+
+-- Remove current file from harpoon
+nnoremap("<leader>hr", function()
+	harpoon_mark.rm_file()
+end)
+
+-- Remove all files from harpoon
+nnoremap("<leader>hc", function()
+	harpoon_mark.clear_all()
+end)
+
+-- Quickly jump to harpooned files
+nnoremap("<leader>1", function()
+	harpoon_ui.nav_file(1)
+end)
+
+nnoremap("<leader>2", function()
+	harpoon_ui.nav_file(2)
+end)
+
+nnoremap("<leader>3", function()
+	harpoon_ui.nav_file(3)
+end)
+
+nnoremap("<leader>4", function()
+	harpoon_ui.nav_file(4)
+end)
+
+nnoremap("<leader>5", function()
+	harpoon_ui.nav_file(5)
+end)
+
+-- Git keymaps --
+nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
 
 -- Insert --
 -- Map jj to <esc>

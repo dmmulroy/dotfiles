@@ -125,8 +125,11 @@ packer.startup(function(use)
 	-- Install maximizer as a depedency to easily toggle max/min a split buffer
 	use("szw/vim-maximizer")
 
-	-- Interactive games for learning vim
-	use("ThePrimeagen/vim-be-good")
+	-- Install dressing to create better ui/pop ups for vim.ui.input and vim.ui.select elements
+	use("stevearc/dressing.nvim")
+
+	-- Install harpoon easy tracking/switching of multiple buffers
+	use("ThePrimeagen/harpoon")
 
 	if is_bootstrapped then
 		require("packer").sync()
