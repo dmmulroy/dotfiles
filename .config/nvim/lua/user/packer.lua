@@ -131,6 +131,9 @@ packer.startup(function(use)
 	-- Install harpoon easy tracking/switching of multiple buffers
 	use("ThePrimeagen/harpoon")
 
+	-- Install wilder to improve the wildmenu
+	use("gelguy/wilder.nvim")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end

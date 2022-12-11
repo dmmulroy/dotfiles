@@ -6,6 +6,8 @@ local nmap = require("user.keymap_utils").nmap
 local harpoon_ui = require("harpoon.ui")
 local harpoon_mark = require("harpoon.mark")
 
+local M = {}
+
 -- Normal --
 -- Disable Space bar since it'll be used as the leader key
 nnoremap("<space>", "<nop>")
@@ -49,6 +51,7 @@ nnoremap("G", "Gzz")
 nnoremap("gg", "ggzz")
 nnoremap("<C-i>", "<C-i>zz")
 nnoremap("<C-o>", "<C-o>zz")
+nnoremap("%", "%zz")
 
 -- Press 'S' for quick find/replace
 nnoremap("S", ":%s//g<left><left>", { silent = false })
@@ -124,6 +127,70 @@ end)
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
 
+-- Telescope keybinds
+nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
+nnoremap("<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
+nnoremap("<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
+nnoremap("<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
+nnoremap("<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
+nnoremap("<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
+nnoremap("<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
+
+nnoremap("<leader>sc", function()
+	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[S]earch [C]ommands" })
+
+nnoremap("<leader>/", function()
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer]" })
+
+nnoremap("<leader>ss", function()
+	require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[S]earch [S]pelling suggestions" })
+
+-- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer)
+M.map_lsp_keybinds = function(buffer_number)
+	nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame", buffer = buffer_number })
+	nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: [C]ode [A]ction", buffer = buffer_number })
+
+	nnoremap("gd", vim.lsp.buf.definition, { desc = "LSP: [G]oto [D]efinition", buffer = buffer_number })
+	nnoremap("gi", vim.lsp.buf.implementation, { desc = "LSP: [G]oto [I]mplementation", buffer = buffer_number })
+
+	-- Telescope LSP keybinds
+	nnoremap(
+		"gr",
+		require("telescope.builtin").lsp_references,
+		{ desc = "LSP: [G]oto [R]eferences", buffer = buffer_number }
+	)
+	nnoremap(
+		"<leader>ds",
+		require("telescope.builtin").lsp_document_symbols,
+		{ desc = "LSP: [D]ocument [S]ymbols", buffer = buffer_number }
+	)
+	nnoremap(
+		"<leader>ws",
+		require("telescope.builtin").lsp_workspace_symbols,
+		{ desc = "LSP: [W]orkspace [S]ymbols", buffer = buffer_number }
+	)
+
+	-- See `:help K` for why this keymap
+	nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
+	nnoremap("<leader>k", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
+
+	-- Lesser used LSP functionality
+	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
+	nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "LSP: Type [D]efinition", buffer = buffer_number })
+end
+
 -- Insert --
 -- Map jj to <esc>
 inoremap("jj", "<esc>")
@@ -138,3 +205,5 @@ xnoremap("<leader>p", '"_dP')
 -- Move selected text up/down in visual mode (TODO: this does not work well, find another solution)
 -- vnoremap("<A-j>", "<cmd>m '>+1<cr>gv=gv")
 -- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv")
+
+return M
