@@ -176,10 +176,11 @@ M.map_lsp_keybinds = function(buffer_number)
 		require("telescope.builtin").lsp_document_symbols,
 		{ desc = "LSP: [D]ocument [S]ymbols", buffer = buffer_number }
 	)
+
 	nnoremap(
-		"<leader>ws",
+		"<leader>ps",
 		require("telescope.builtin").lsp_workspace_symbols,
-		{ desc = "LSP: [W]orkspace [S]ymbols", buffer = buffer_number }
+		{ desc = "LSP: [P]roject [S]ymbols", buffer = buffer_number }
 	)
 
 	-- See `:help K` for why this keymap
