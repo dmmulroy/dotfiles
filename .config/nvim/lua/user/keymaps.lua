@@ -127,7 +127,7 @@ end)
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
 
--- Telescope keybinds
+-- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
 nnoremap("<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
 nnoremap("<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
@@ -157,7 +157,7 @@ nnoremap("<leader>ss", function()
 	}))
 end, { desc = "[S]earch [S]pelling suggestions" })
 
--- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer)
+-- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
 M.map_lsp_keybinds = function(buffer_number)
 	nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame", buffer = buffer_number })
 	nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: [C]ode [A]ction", buffer = buffer_number })
@@ -165,7 +165,7 @@ M.map_lsp_keybinds = function(buffer_number)
 	nnoremap("gd", vim.lsp.buf.definition, { desc = "LSP: [G]oto [D]efinition", buffer = buffer_number })
 	nnoremap("gi", vim.lsp.buf.implementation, { desc = "LSP: [G]oto [I]mplementation", buffer = buffer_number })
 
-	-- Telescope LSP keybinds
+	-- Telescope LSP keybinds --
 	nnoremap(
 		"gr",
 		require("telescope.builtin").lsp_references,
@@ -190,6 +190,9 @@ M.map_lsp_keybinds = function(buffer_number)
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
 	nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "LSP: Type [D]efinition", buffer = buffer_number })
 end
+
+-- Symbol Outline keybind --
+nnoremap("<leader>so", ":SymbolsOutline<cr>")
 
 -- Insert --
 -- Map jj to <esc>

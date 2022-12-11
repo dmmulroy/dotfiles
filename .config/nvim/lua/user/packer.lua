@@ -134,6 +134,9 @@ packer.startup(function(use)
 	-- Install wilder to improve the wildmenu
 	use("gelguy/wilder.nvim")
 
+	-- Install symbol-outine for a sidebar toggle for the current buffers symbols
+	use("simrat39/symbols-outline.nvim")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end
