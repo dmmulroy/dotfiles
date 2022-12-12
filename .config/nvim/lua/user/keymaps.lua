@@ -64,10 +64,10 @@ nnoremap("<S-H>", "^")
 nnoremap("<leader>no", "<cmd>noh<cr>")
 
 -- Diagnostics
-nmap("[d", vim.diagnostic.goto_prev)
-nmap("]d", vim.diagnostic.goto_next)
+nmap("[d", ":lua vim.diagnostic.goto_prev()<cr>zz")
+nmap("]d", ":lua vim.diagnostic.goto_next()<cr>zz")
 nmap("<leader>d", vim.diagnostic.open_float)
-nmap("<leader>dq", vim.diagnostic.setloclist)
+nmap("<leader>ld", vim.diagnostic.setloclist)
 
 -- Increment/Decrement numbers w/ leader key
 nnoremap("<leader>+", "<C-a>")
@@ -172,9 +172,9 @@ M.map_lsp_keybinds = function(buffer_number)
 		{ desc = "LSP: [G]oto [R]eferences", buffer = buffer_number }
 	)
 	nnoremap(
-		"<leader>ds",
+		"<leader>bs",
 		require("telescope.builtin").lsp_document_symbols,
-		{ desc = "LSP: [D]ocument [S]ymbols", buffer = buffer_number }
+		{ desc = "LSP: [B]uffer [S]ymbols", buffer = buffer_number }
 	)
 
 	nnoremap(
@@ -189,7 +189,7 @@ M.map_lsp_keybinds = function(buffer_number)
 
 	-- Lesser used LSP functionality
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
-	nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "LSP: Type [D]efinition", buffer = buffer_number })
+	nnoremap("<leader>td", vim.lsp.buf.type_definition, { desc = "LSP: [T]ype [D]efinition", buffer = buffer_number })
 end
 
 -- Symbol Outline keybind --
