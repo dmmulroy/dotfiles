@@ -137,6 +137,9 @@ packer.startup(function(use)
 	-- Install symbol-outine for a sidebar toggle for the current buffers symbols
 	use("simrat39/symbols-outline.nvim")
 
+	-- Install toggleterm for better terminal support within neovim
+	use("akinsho/toggleterm.nvim")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end

@@ -2,7 +2,7 @@ local nnoremap = require("user.keymap_utils").nnoremap
 local vnoremap = require("user.keymap_utils").vnoremap
 local inoremap = require("user.keymap_utils").inoremap
 local xnoremap = require("user.keymap_utils").xnoremap
-local nmap = require("user.keymap_utils").nmap
+local tnoremap = require("user.keymap_utils").tnoremap
 local harpoon_ui = require("harpoon.ui")
 local harpoon_mark = require("harpoon.mark")
 
@@ -21,12 +21,6 @@ nnoremap("<C-h>", "<C-w>h")
 -- Buffer navigation
 nnoremap("<A-l>", "<cmd>bnext<cr>")
 nnoremap("<A-h>", "<cmd>bprevious<cr>")
-
--- Tab navigation
-nnoremap("<leader>to", ":tabnew<CR>") -- open new tab
-nnoremap("<leader>tx", ":tabclose<CR>") -- close current tab
-nnoremap("<leader>tn", ":tabn<CR>") --  go to next tab
-nnoremap("<leader>tp", ":tabp<CR>") --  go to previous tab
 
 -- Save with leader key
 nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
@@ -64,10 +58,10 @@ nnoremap("<S-H>", "^")
 nnoremap("<leader>no", "<cmd>noh<cr>")
 
 -- Diagnostics
-nmap("[d", ":lua vim.diagnostic.goto_prev()<cr>zz")
-nmap("]d", ":lua vim.diagnostic.goto_next()<cr>zz")
-nmap("<leader>d", vim.diagnostic.open_float)
-nmap("<leader>ld", vim.diagnostic.setloclist)
+nnoremap("[d", ":lua vim.diagnostic.goto_prev()<cr>zz")
+nnoremap("]d", ":lua vim.diagnostic.goto_next()<cr>zz")
+nnoremap("<leader>d", vim.diagnostic.open_float)
+nnoremap("<leader>ld", vim.diagnostic.setloclist)
 
 -- Increment/Decrement numbers w/ leader key
 nnoremap("<leader>+", "<C-a>")
@@ -189,7 +183,7 @@ M.map_lsp_keybinds = function(buffer_number)
 
 	-- Lesser used LSP functionality
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
-	nnoremap("<leader>td", vim.lsp.buf.type_definition, { desc = "LSP: [T]ype [D]efinition", buffer = buffer_number })
+	nnoremap("td", vim.lsp.buf.type_definition, { desc = "LSP: [T]ype [D]efinition", buffer = buffer_number })
 end
 
 -- Symbol Outline keybind --
@@ -209,5 +203,19 @@ xnoremap("<leader>p", '"_dP')
 -- Move selected text up/down in visual mode (TODO: this does not work well, find another solution)
 -- vnoremap("<A-j>", "<cmd>m '>+1<cr>gv=gv")
 -- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv")
+
+-- Terminal --
+-- Enter normal mode while in a terminal
+tnoremap("<esc>", [[<C-\><C-n>]])
+tnoremap("jj", [[<C-\><C-n>]])
+
+-- Window navigation from terminal
+tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
+tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
+tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
+tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
+
+-- Reenable default <space> functionality to prevent input delay
+tnoremap("<space>", "<space")
 
 return M
