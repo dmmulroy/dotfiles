@@ -18,7 +18,11 @@ local on_attach = function(_, buffer_number)
 end
 
 -- Setup mason so it can manage 3rd party LSPs
-require("mason").setup()
+require("mason").setup({
+	ui = {
+		border = "rounded",
+	},
+})
 
 -- LSPs to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
@@ -33,6 +37,7 @@ local servers = {
 	"bashls",
 	"yamlls",
 	"sumneko_lua",
+	"ocamllsp",
 }
 
 -- Install the above servers

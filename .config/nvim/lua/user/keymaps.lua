@@ -207,7 +207,6 @@ xnoremap("<leader>p", '"_dP')
 -- Terminal --
 -- Enter normal mode while in a terminal
 tnoremap("<esc>", [[<C-\><C-n>]])
-tnoremap("jj", [[<C-\><C-n>]])
 
 -- Window navigation from terminal
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
@@ -216,6 +215,6 @@ tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
 tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
 
 -- Reenable default <space> functionality to prevent input delay
-tnoremap("<space>", "<space")
+tnoremap("<space>", "<space>")
 
 return M
