@@ -31,7 +31,7 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
--- Map netrw to <leader>e
+-- Map nvim-tree to <leader>e
 nnoremap("<leader>e", "<cmd>NvimTreeFindFileToggle<cr>")
 
 -- Center buffer while navigating
@@ -46,13 +46,17 @@ nnoremap("gg", "ggzz")
 nnoremap("<C-i>", "<C-i>zz")
 nnoremap("<C-o>", "<C-o>zz")
 nnoremap("%", "%zz")
+nnoremap("*", "*zz")
 
 -- Press 'S' for quick find/replace
 nnoremap("S", ":%s//g<left><left>", { silent = false })
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
-nnoremap("<S-L>", "$")
-nnoremap("<S-H>", "^")
+nnoremap("L", "$")
+nnoremap("H", "^")
+
+-- Press 'U' for undo
+nnoremap("U", "<C-r>")
 
 -- Turn off highlighted results
 nnoremap("<leader>no", "<cmd>noh<cr>")
