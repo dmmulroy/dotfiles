@@ -116,6 +116,12 @@ packer.startup(function(use)
 		tag = "nightly",
 	})
 
+	-- Additional text objects via treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+	})
+
 	-- Install vim-tmux-navigator to have integration between nvim and tmux window nav
 	use("christoomey/vim-tmux-navigator")
 
