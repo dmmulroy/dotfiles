@@ -37,7 +37,7 @@ vim.opt.smartcase = true
 vim.opt.breakindent = true
 
 -- Decrease updatetime to 200ms
-vim.opt.updatetime = 200
+vim.opt.updatetime = 50
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -62,7 +62,8 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 20
 
--- Enable floating window popup menu for completion on command line
--- vim.opt.pumblend = 17
--- vim.opt.wildmode = "longest:full"
--- vim.opt.wildoptions = "pum"
+-- Always keep 8 lines above/below cursor unless at start/end of file
+vim.opt.scrolloff = 8
+
+-- Place a column line
+vim.opt.colorcolumn = "80"

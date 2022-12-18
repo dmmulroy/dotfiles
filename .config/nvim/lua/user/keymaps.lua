@@ -35,7 +35,7 @@ nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 nnoremap("<leader>e", "<cmd>NvimTreeFindFileToggle<cr>")
 
 -- Center buffer while navigating
-nnoremap("<c-u>", "<c-u>zz")
+nnoremap("<C-u>", "<C-u>zz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("{", "{zz")
 nnoremap("}", "}zz")
@@ -48,8 +48,8 @@ nnoremap("<C-o>", "<C-o>zz")
 nnoremap("%", "%zz")
 nnoremap("*", "*zz")
 
--- Press 'S' for quick find/replace
-nnoremap("S", ":%s//g<left><left>", { silent = false })
+-- Press 'S' for quick find/replace for the word under the cursor
+nnoremap("S", ":%s/<C-r><C-w>//gI<Left><Left><Left>")
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 nnoremap("L", "$")
@@ -68,7 +68,7 @@ nnoremap("<leader>d", vim.diagnostic.open_float)
 nnoremap("<leader>ld", vim.diagnostic.setloclist)
 
 -- Increment/Decrement numbers w/ leader key
-nnoremap("<leader>+", "<C-a>")
+nnoremap("<leader>=", "<C-a>")
 nnoremap("<leader>-", "<C-x>")
 
 -- Map MaximizerToggle (szw/vim-maximizer) to leader-m
@@ -205,8 +205,8 @@ vnoremap("<space>", "<nop>")
 xnoremap("<leader>p", '"_dP')
 
 -- Move selected text up/down in visual mode (TODO: this does not work well, find another solution)
--- vnoremap("<A-j>", "<cmd>m '>+1<cr>gv=gv")
--- vnoremap("<A-k>", "<cmd>m '<-2<cr>gv=gv")
+vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
+vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Terminal --
 -- Enter normal mode while in a terminal

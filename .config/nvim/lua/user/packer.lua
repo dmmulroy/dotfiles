@@ -140,6 +140,9 @@ packer.startup(function(use)
 	-- Install toggleterm for better terminal support within neovim
 	use("akinsho/toggleterm.nvim")
 
+	-- Install context-commentstring to enable jsx commenting is ts/js/tsx/jsx files
+	use("JoosepAlviste/nvim-ts-context-commentstring")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end
