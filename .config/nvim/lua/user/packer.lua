@@ -34,7 +34,7 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- Install the catppuccin theme
-	use({ "catppuccin/nvim", as = "catppuccin" })
+	use("catppuccin/nvim")
 
 	-- Install treesitter for better syntax highlighting
 	use({
@@ -122,9 +122,6 @@ packer.startup(function(use)
 		after = "nvim-treesitter",
 	})
 
-	-- Install vim-tmux-navigator to have integration between nvim and tmux window nav
-	use("christoomey/vim-tmux-navigator")
-
 	-- Install vim-surround for managing parenthese, brackets, quotes, etc
 	use("tpope/vim-surround")
 
@@ -148,6 +145,12 @@ packer.startup(function(use)
 
 	-- Install context-commentstring to enable jsx commenting is ts/js/tsx/jsx files
 	use("JoosepAlviste/nvim-ts-context-commentstring")
+
+	-- Install vim-illuminate to hightlight other uses of the word under your cursor
+	use("RRethy/vim-illuminate")
+
+	-- Install neodev for better nvim configuration and plugin authoring via lsp configurations
+	use("folke/neodev.nvim")
 
 	if is_bootstrapped then
 		require("packer").sync()

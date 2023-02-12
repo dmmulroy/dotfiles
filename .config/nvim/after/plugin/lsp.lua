@@ -18,12 +18,8 @@ local on_attach = function(_, buffer_number)
 	end, { desc = "LSP: Format current buffer with LSP" })
 end
 
--- Setup mason so it can manage 3rd party LSPs
-require("mason").setup({
-	ui = {
-		border = "rounded",
-	},
-})
+-- Use neodev to configure lua_ls in nvim directories - must load before lspconfig
+require("neodev").setup()
 
 -- LSPs to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
@@ -37,10 +33,17 @@ local servers = {
 	"tailwindcss",
 	"bashls",
 	"yamlls",
-	"sumneko_lua",
-	-- Don't use mason to install ocamllsp and use version managed opam
-	-- "ocamllsp",
+	"lua_ls",
 }
+
+-- local manually_installed_servers = { "ocamllsp" }
+
+-- Setup mason so it can manage 3rd party LSPs
+require("mason").setup({
+	ui = {
+		border = "rounded",
+	},
+})
 
 -- Install the above servers
 require("mason-lspconfig").setup({
@@ -49,7 +52,6 @@ require("mason-lspconfig").setup({
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Iterate over our servers and set them up
@@ -81,44 +83,10 @@ null_ls.setup({
 	sources = {
 		formatting.prettier,
 		formatting.stylua,
+		formatting.ocamlformat,
 		diagnostics.eslint_d,
 	},
 })
 
 -- Turn on LSP status and progress information
 require("fidget").setup()
-
--- Manual LSP Server Overrides --
--- Lua
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-require("lspconfig").sumneko_lua.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you"re using (most likely LuaJIT)
-				version = "LuaJIT",
-				-- Setup your lua path
-				path = runtime_path,
-			},
-			diagnostics = {
-				globals = { "vim" },
-			},
-			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = { enable = false },
-		},
-	},
-})
-
--- OCaml
-require("lspconfig").ocamllsp.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-null_ls.register(formatting.ocamlformat)

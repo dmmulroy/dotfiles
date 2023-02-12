@@ -5,6 +5,7 @@ local xnoremap = require("user.keymap_utils").xnoremap
 local tnoremap = require("user.keymap_utils").tnoremap
 local harpoon_ui = require("harpoon.ui")
 local harpoon_mark = require("harpoon.mark")
+local illuminate = require("illuminate")
 
 local M = {}
 
@@ -64,7 +65,12 @@ nnoremap("<leader>no", "<cmd>noh<cr>")
 -- Diagnostics
 nnoremap("[d", ":lua vim.diagnostic.goto_prev()<cr>zz")
 nnoremap("]d", ":lua vim.diagnostic.goto_next()<cr>zz")
-nnoremap("<leader>d", vim.diagnostic.open_float)
+nnoremap("<leader>d", function()
+	vim.diagnostic.open_float({
+		border = "rounded",
+	})
+end)
+
 nnoremap("<leader>ld", vim.diagnostic.setloclist)
 
 -- Increment/Decrement numbers w/ leader key
@@ -79,6 +85,9 @@ nnoremap("<leader>=", "<C-w>=")
 
 -- Press leader f to format
 nnoremap("<leader>f", ":Format<cr>")
+
+-- Press leader rw to rotate open windows
+nnoremap("<leader>rw", ":RotateWindows<cr>", { desc = "[R]otate [W]indows" })
 
 -- Harpoon keybinds --
 -- Open harpoon ui
@@ -193,6 +202,15 @@ end
 -- Symbol Outline keybind --
 nnoremap("<leader>so", ":SymbolsOutline<cr>")
 
+-- Vim Illuminate keybinds
+nnoremap("<leader>in", function()
+	illuminate.goto_next_reference()
+end, { desc = "[I]lluminate: Goto [N]ext reference" })
+
+nnoremap("<leader>ip", function()
+	illuminate.goto_prev_reference()
+end, { desc = "[I]lluminate: Goto [P]revious reference" })
+
 -- Insert --
 -- Map jj to <esc>
 inoremap("jj", "<esc>")
@@ -200,6 +218,10 @@ inoremap("jj", "<esc>")
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key
 vnoremap("<space>", "<nop>")
+
+-- Press 'H', 'L' to jump to start/end of a line (first/last char)
+vnoremap("L", "$<left>")
+vnoremap("H", "^")
 
 -- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
