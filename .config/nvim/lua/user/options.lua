@@ -40,7 +40,7 @@ vim.opt.breakindent = true
 vim.opt.updatetime = 50
 
 -- Set completeopt to have a better completion experience
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menuone", "noselect" }
 
 -- Enable persistent undo history
 vim.opt.undofile = true

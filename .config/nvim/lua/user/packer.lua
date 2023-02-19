@@ -4,155 +4,158 @@ local is_bootstrapped = false
 
 -- If packer hasn"t previously been installed, git clone and install it
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
-	is_bootstrapped = true
-	vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_path)
-	vim.cmd.packadd("packer.nvim")
+  is_bootstrapped = true
+  vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_path)
+  vim.cmd.packadd("packer.nvim")
 end
 
 -- Set up an autocmd to automatically run PackerCompile on updates to this file
 vim.api.nvim_create_autocmd("BufWritePost", {
-	command = "source <afile> | PackerSync",
-	group = vim.api.nvim_create_augroup("recompile_packer", { clear = true }),
-	pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua",
+  command = "source <afile> | PackerSync",
+  group = vim.api.nvim_create_augroup("recompile_packer", { clear = true }),
+  pattern = vim.fn.stdpath("config") .. "/lua/user/packer.lua",
 })
 
 local packer = require("packer")
 
 -- Packer configuration
 local conf = {
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
+  display = {
+    open_fn = function()
+      return require("packer.util").float({ border = "rounded" })
+    end,
+  },
 }
 
 packer.init(conf)
 
 packer.startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+  -- Packer can manage itself
+  use("wbthomason/packer.nvim")
 
-	-- Install the catppuccin theme
-	use("catppuccin/nvim")
+  -- Install the catppuccin theme
+  use("catppuccin/nvim")
 
-	-- Install treesitter for better syntax highlighting
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end,
-	})
+  -- Install treesitter for better syntax highlighting
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      require("nvim-treesitter.install").update({ with_sync = true })
+    end,
+  })
 
-	-- Install LSP
-	use({
-		"neovim/nvim-lspconfig",
-		requires = {
-			-- Tool/Dependency to automatically install LSPs to stdpath
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+  -- Additional text objects for treesitter
+  use({
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+  })
 
-			-- Progress/Status update for LSP
-			"j-hui/fidget.nvim",
-		},
-	})
+  -- Install LSP
+  use({
+    "neovim/nvim-lspconfig",
+    requires = {
+      -- Plugin and UI to automatically install LSPs to stdpath
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
 
-	-- Install Autocomplete dependencies
-	use({
-		"hrsh7th/nvim-cmp",
-		requires = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-			"onsails/lspkind.nvim",
-		},
-	})
+      -- Install null-ls for diagnostics, code actions, and formatting
+      "jose-elias-alvarez/null-ls.nvim",
 
-	-- Install null-ls for formatting + linting
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("jayp0521/mason-null-ls.nvim")
+      -- Install neodev for better nvim configuration and plugin authoring via lsp configurations
+      "folke/neodev.nvim",
+      --
+      -- Progress/Status update for LSP
+      "j-hui/fidget.nvim",
+    },
+  })
 
-	-- Install telescope
-	use({
-		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-	})
+  -- Install Autocomplete dependencies
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+      "onsails/lspkind.nvim",
+      "ray-x/lsp_signature.nvim",
+    },
+  })
 
-	-- Install fuzzy finder for telescope
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-		cond = vim.fn.executable("make") == 1,
-	})
+  -- Install telescope
+  use({
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
 
-	-- Install lualine for a better status line
-	use("nvim-lualine/lualine.nvim")
+  -- Install fuzzy finder for telescope
+  use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+    cond = vim.fn.executable("make") == 1,
+  })
 
-	-- Install gitsigns for git decorations/indicators
-	use("lewis6991/gitsigns.nvim")
+  -- Install nvim-tree for a vscode-like file tree/explorer
+  use({
+    "nvim-tree/nvim-tree.lua",
+    requires = {
+      -- vscode icones
+      "nvim-tree/nvim-web-devicons",
+      -- Integrate lsp actions with file operations
+      "antosha417/nvim-lsp-file-operations",
+    },
+    tag = "nightly",
+  })
 
-	-- Install Comment to enable easy/quick (un)commenting
-	use("numToStr/Comment.nvim")
+  -- Install lualine for a better status line
+  use("nvim-lualine/lualine.nvim")
 
-	-- Install indent_blankline to style indentation
-	use("lukas-reineke/indent-blankline.nvim")
+  -- Install gitsigns for git decorations/indicators
+  use("lewis6991/gitsigns.nvim")
 
-	-- Install nvim-autopairs  and nvim-ts-autotag to auto close brackets & tags
-	use("windwp/nvim-autopairs")
-	use("windwp/nvim-ts-autotag")
+  -- Install Comment to enable easy/quick (un)commenting
+  use("numToStr/Comment.nvim")
 
-	-- Install nvim-tree for a vscode-like file tree/explorer
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons",
-		},
-		tag = "nightly",
-	})
+  -- Install indent_blankline to style indentation
+  use("lukas-reineke/indent-blankline.nvim")
 
-	-- Additional text objects via treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-	})
+  -- Install nvim-autopairs  and nvim-ts-autotag to auto close brackets & tags
+  use("windwp/nvim-autopairs")
+  use("windwp/nvim-ts-autotag")
 
-	-- Install vim-surround for managing parenthese, brackets, quotes, etc
-	use("tpope/vim-surround")
+  -- Install vim-surround for managing parenthese, brackets, quotes, etc
+  use("tpope/vim-surround")
 
-	-- Install maximizer as a depedency to easily toggle max/min a split buffer
-	use("szw/vim-maximizer")
+  -- Install maximizer as a depedency to easily toggle max/min a split buffer
+  use("szw/vim-maximizer")
 
-	-- Install dressing to create better ui/pop ups for vim.ui.input and vim.ui.select elements
-	use("stevearc/dressing.nvim")
+  -- Install dressing to create better ui/pop ups for vim.ui.input and vim.ui.select elements
+  use("stevearc/dressing.nvim")
 
-	-- Install harpoon easy tracking/switching of multiple buffers
-	use("ThePrimeagen/harpoon")
+  -- Install harpoon easy tracking/switching of multiple buffers
+  use("ThePrimeagen/harpoon")
 
-	-- Install wilder to improve the wildmenu
-	use("gelguy/wilder.nvim")
+  -- Install wilder to improve the wildmenu
+  use("gelguy/wilder.nvim")
 
-	-- Install symbol-outine for a sidebar toggle for the current buffers symbols
-	use("simrat39/symbols-outline.nvim")
+  -- Install symbol-outine for a sidebar toggle for the current buffers symbols
+  use("simrat39/symbols-outline.nvim")
 
-	-- Install toggleterm for better terminal support within neovim
-	use("akinsho/toggleterm.nvim")
+  -- Install toggleterm for better terminal support within neovim
+  use("akinsho/toggleterm.nvim")
 
-	-- Install context-commentstring to enable jsx commenting is ts/js/tsx/jsx files
-	use("JoosepAlviste/nvim-ts-context-commentstring")
+  -- Install context-commentstring to enable jsx commenting is ts/js/tsx/jsx files
+  use("JoosepAlviste/nvim-ts-context-commentstring")
 
-	-- Install vim-illuminate to hightlight other uses of the word under your cursor
-	use("RRethy/vim-illuminate")
+  -- Install vim-illuminate to hightlight other uses of the word under your cursor
+  use("RRethy/vim-illuminate")
 
-	-- Install neodev for better nvim configuration and plugin authoring via lsp configurations
-	use("folke/neodev.nvim")
-
-	if is_bootstrapped then
-		require("packer").sync()
-	end
+  if is_bootstrapped then
+    require("packer").sync()
+  end
 end)

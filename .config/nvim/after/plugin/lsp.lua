@@ -1,92 +1,104 @@
+local null_ls = require("null-ls")
 local map_lsp_keybinds = require("user.keymaps").map_lsp_keybinds
-
-local on_attach = function(_, buffer_number)
-	-- Pass the current buffer to map lsp keybinds
-	map_lsp_keybinds(buffer_number)
-
-	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
-		if vim.lsp.buf.format then
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name ~= "tsserver"
-				end,
-			})
-		elseif vim.lsp.buf.formatting then
-			vim.lsp.buf.formatting()
-		end
-	end, { desc = "LSP: Format current buffer with LSP" })
-end
 
 -- Use neodev to configure lua_ls in nvim directories - must load before lspconfig
 require("neodev").setup()
 
--- LSPs to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
+-- LSP servers to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
-	"tsserver",
-	"cssls",
-	"graphql",
-	"jsonls",
-	"marksman",
-	"prismals",
-	"sqlls",
-	"tailwindcss",
-	"bashls",
-	"yamlls",
-	"lua_ls",
+  "tsserver",
+  "cssls",
+  "graphql",
+  "jsonls",
+  "marksman",
+  "prismals",
+  "sqlls",
+  "tailwindcss",
+  "bashls",
+  "yamlls",
+  "lua_ls",
+  "ocamllsp",
 }
 
--- local manually_installed_servers = { "ocamllsp" }
-
--- Setup mason so it can manage 3rd party LSPs
+-- Setup mason so it can manage 3rd party LSP servers
 require("mason").setup({
-	ui = {
-		border = "rounded",
-	},
+  ui = {
+    border = "rounded",
+  },
 })
 
--- Install the above servers
+-- Configure mason to auto install servers
 require("mason-lspconfig").setup({
-	ensure_installed = servers,
+  automatic_installation = { exclude = { "ocamllsp" } },
 })
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+local on_attach = function(_, buffer_number)
+  -- Pass the current buffer to map lsp keybinds
+  map_lsp_keybinds(buffer_number)
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
+    vim.lsp.buf.format({
+      filter = function(client)
+        -- Use Prettier to format TS/JS if it's available
+        return client.name ~= "tsserver" or not null_ls.is_registered("prettier")
+      end,
+    })
+  end, { desc = "LSP: Format current buffer with LSP" })
+end
+
 -- Iterate over our servers and set them up
 for _, lsp in ipairs(servers) do
-	require("lspconfig")[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
+  require("lspconfig")[lsp].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
 end
 
 -- Congifure LSP linting/formatting
-local mason_null_ls = require("mason-null-ls")
-local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
-
--- Install linters and formatters
-mason_null_ls.setup({
-	ensure_installed = {
-		"prettier",
-		"eslint_d",
-		"stylua",
-		-- Don't use mason_null_ls to install ocamlformat and use version managed opam
-		-- "ocamlformat",
-	},
-})
+local code_actions = null_ls.builtins.code_actions
 
 null_ls.setup({
-	sources = {
-		formatting.prettier,
-		formatting.stylua,
-		formatting.ocamlformat,
-		diagnostics.eslint_d,
-	},
+  border = "rounded",
+  sources = {
+    -- formatting
+    formatting.prettier,
+    formatting.stylua,
+    formatting.ocamlformat,
+
+    -- diagnostics
+    diagnostics.eslint_d.with({
+      condition = function(utils)
+        return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
+      end,
+    }),
+
+    -- code actions
+    code_actions.eslint_d.with({
+      condition = function(utils)
+        return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
+      end,
+    }),
+  },
+})
+
+-- Enable lsp_signature
+require("lsp_signature").setup({
+  bind = true,
+  hint_enable = false,
+  handler_opts = {
+    border = "rounded",
+  },
 })
 
 -- Turn on LSP status and progress information
 require("fidget").setup()
+
+-- Configure borderd for LspInfo ui
+require("lspconfig.ui.windows").default_options.border = "rounded"

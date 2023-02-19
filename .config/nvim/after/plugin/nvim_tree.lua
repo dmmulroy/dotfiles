@@ -15,4 +15,22 @@ require("nvim-tree").setup({
 	git = {
 		ignore = false,
 	},
+	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
+		severity = {
+			min = vim.diagnostic.severity.INFO,
+			max = vim.diagnostic.severity.ERROR,
+		},
+	},
+})
+
+-- Enables LSP file operations in nvim-tree
+require("lsp-file-operations").setup()
+
+-- Create an autocmd to automatically open nvim-tree when opening vim
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		require("nvim-tree.api").tree.open()
+	end,
 })

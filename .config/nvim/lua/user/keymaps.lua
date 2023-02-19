@@ -145,21 +145,18 @@ nnoremap("<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]ea
 
 nnoremap("<leader>sc", function()
 	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
-		winblend = 10,
 		previewer = false,
 	}))
 end, { desc = "[S]earch [C]ommands" })
 
 nnoremap("<leader>/", function()
 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
 		previewer = false,
 	}))
 end, { desc = "[/] Fuzzily search in current buffer]" })
 
 nnoremap("<leader>ss", function()
 	require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
-		winblend = 10,
 		previewer = false,
 	}))
 end, { desc = "[S]earch [S]pelling suggestions" })

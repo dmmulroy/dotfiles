@@ -1,5 +1,4 @@
 local actions = require("telescope.actions")
-local nmap = require("user.keymap_utils").nmap
 
 require("telescope").setup({
 	defaults = {
