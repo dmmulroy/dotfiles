@@ -6,30 +6,34 @@ require("neodev").setup()
 
 -- LSP servers to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
-  "tsserver",
-  "cssls",
-  "graphql",
-  "jsonls",
-  "marksman",
-  "prismals",
-  "sqlls",
-  "tailwindcss",
-  "bashls",
-  "yamlls",
-  "lua_ls",
-  "ocamllsp",
+	tsserver = {
+		experimental = {
+			enableProjectDiagnostics = true,
+		},
+	},
+	cssls = {},
+	graphql = {},
+	jsonls = {},
+	marksman = {},
+	prismals = {},
+	sqlls = {},
+	tailwindcss = {},
+	bashls = {},
+	yamlls = {},
+	lua_ls = {},
+	ocamllsp = {},
 }
 
 -- Setup mason so it can manage 3rd party LSP servers
 require("mason").setup({
-  ui = {
-    border = "rounded",
-  },
+	ui = {
+		border = "rounded",
+	},
 })
 
 -- Configure mason to auto install servers
 require("mason-lspconfig").setup({
-  automatic_installation = { exclude = { "ocamllsp" } },
+	automatic_installation = { exclude = { "ocamllsp" } },
 })
 
 -- nvim-cmp supports additional completion capabilities
@@ -37,26 +41,27 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local on_attach = function(_, buffer_number)
-  -- Pass the current buffer to map lsp keybinds
-  map_lsp_keybinds(buffer_number)
+	-- Pass the current buffer to map lsp keybinds
+	map_lsp_keybinds(buffer_number)
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
-    vim.lsp.buf.format({
-      filter = function(client)
-        -- Use Prettier to format TS/JS if it's available
-        return client.name ~= "tsserver" or not null_ls.is_registered("prettier")
-      end,
-    })
-  end, { desc = "LSP: Format current buffer with LSP" })
+	-- Create a command `:Format` local to the LSP buffer
+	vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
+		vim.lsp.buf.format({
+			filter = function(client)
+				-- Use Prettier to format TS/JS if it's available
+				return client.name ~= "tsserver" or not null_ls.is_registered("prettier")
+			end,
+		})
+	end, { desc = "LSP: Format current buffer with LSP" })
 end
 
 -- Iterate over our servers and set them up
-for _, lsp in ipairs(servers) do
-  require("lspconfig")[lsp].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
+for name, settings in pairs(servers) do
+	require("lspconfig")[name].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+		settings = settings,
+	})
 end
 
 -- Congifure LSP linting/formatting
@@ -65,36 +70,37 @@ local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 
 null_ls.setup({
-  border = "rounded",
-  sources = {
-    -- formatting
-    formatting.prettier,
-    formatting.stylua,
-    formatting.ocamlformat,
+	border = "rounded",
+	sources = {
+		-- formatting
+		formatting.prettier,
+		formatting.stylua,
+		formatting.ocamlformat,
 
-    -- diagnostics
-    diagnostics.eslint_d.with({
-      condition = function(utils)
-        return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
-      end,
-    }),
+		-- diagnostics
+		diagnostics.tsc,
+		diagnostics.eslint_d.with({
+			condition = function(utils)
+				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
+			end,
+		}),
 
-    -- code actions
-    code_actions.eslint_d.with({
-      condition = function(utils)
-        return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
-      end,
-    }),
-  },
+		-- code actions
+		code_actions.eslint_d.with({
+			condition = function(utils)
+				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
+			end,
+		}),
+	},
 })
 
 -- Enable lsp_signature
 require("lsp_signature").setup({
-  bind = true,
-  hint_enable = false,
-  handler_opts = {
-    border = "rounded",
-  },
+	bind = true,
+	hint_enable = false,
+	handler_opts = {
+		border = "rounded",
+	},
 })
 
 -- Turn on LSP status and progress information
