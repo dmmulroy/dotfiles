@@ -44,16 +44,20 @@ cmp.setup({
 	}),
 	-- sources for autocompletion
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp", priority = 3 }, -- lsp
-		{ name = "luasnip", priority = 2, max_item_count = 3 }, -- snippets
-		{ name = "buffer" }, -- text within current buffer
+		{ name = "nvim_lsp" }, -- lsp
+		{ name = "luasnip", max_item_count = 3 }, -- snippets
+		{ name = "buffer", max_item_count = 5 }, -- text within current buffer
 		{ name = "path" }, -- file system paths
 	}),
 	-- Enable pictogram icons for lsp/autocompletion
 	formatting = {
 		format = lspkind.cmp_format({
+			mode = "symbol_text",
 			maxwidth = 50,
 			ellipsis_char = "...",
 		}),
+	},
+	experimental = {
+		ghost_text = false,
 	},
 })

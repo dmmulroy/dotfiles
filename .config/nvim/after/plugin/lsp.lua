@@ -78,7 +78,6 @@ null_ls.setup({
 		formatting.ocamlformat,
 
 		-- diagnostics
-		diagnostics.tsc,
 		diagnostics.eslint_d.with({
 			condition = function(utils)
 				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
@@ -91,15 +90,6 @@ null_ls.setup({
 				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
 			end,
 		}),
-	},
-})
-
--- Enable lsp_signature
-require("lsp_signature").setup({
-	bind = true,
-	hint_enable = false,
-	handler_opts = {
-		border = "rounded",
 	},
 })
 

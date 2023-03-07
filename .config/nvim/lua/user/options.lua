@@ -67,3 +67,7 @@ vim.opt.scrolloff = 8
 
 -- Place a column line
 vim.opt.colorcolumn = "80"
+
+-- Disable Copilot's tab mapping since it's mapped to nvim-cmp
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true

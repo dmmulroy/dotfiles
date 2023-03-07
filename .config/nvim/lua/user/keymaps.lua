@@ -257,6 +257,12 @@ end, { desc = "[I]lluminate: Goto [P]revious reference" })
 -- Map jj to <esc>
 inoremap("jj", "<esc>")
 
+-- Remap copilot to use <C-/> instead of <Tab> since <Tab> is used for completion
+inoremap("<C-/>", function()
+	local copilot_keys = vim.fn["copilot#Accept"]("")
+	vim.api.nvim_feedkeys(copilot_keys, "i", true)
+end, { silent = true })
+
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key
 vnoremap("<space>", "<nop>")

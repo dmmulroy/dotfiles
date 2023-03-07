@@ -31,6 +31,8 @@ require("lsp-file-operations").setup()
 -- Create an autocmd to automatically open nvim-tree when opening vim
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
-		require("nvim-tree.api").tree.open()
+		if not string.match(vim.api.nvim_buf_get_name(0), "^(COMMIT_EDITMSG|MERGE_MSG)$") then
+			require("nvim-tree.api").tree.open()
+		end
 	end,
 })
