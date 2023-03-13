@@ -115,8 +115,11 @@ nnoremap("<leader>cn", ":cnext<cr>zz")
 -- Navigate to previos qflist item
 nnoremap("<leader>cp", ":cprevious<cr>zz")
 
+-- Open the qflist
+nnoremap("<leader>co", ":copen<cr>zz")
+
 -- Close the qflist
-nnoremap("<leader>cc", ":cclose<cr>zz")
+nnoremap("<leader>cq", ":cclose<cr>zz")
 
 -- Increment/Decrement numbers w/ leader key
 nnoremap("<leader>=", "<C-a>")
