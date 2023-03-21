@@ -119,7 +119,7 @@ nnoremap("<leader>cp", ":cprevious<cr>zz")
 nnoremap("<leader>co", ":copen<cr>zz")
 
 -- Close the qflist
-nnoremap("<leader>cq", ":cclose<cr>zz")
+nnoremap("<leader>cc", ":cclose<cr>zz")
 
 -- Increment/Decrement numbers w/ leader key
 nnoremap("<leader>=", "<C-a>")

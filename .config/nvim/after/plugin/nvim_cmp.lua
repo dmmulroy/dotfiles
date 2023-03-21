@@ -47,7 +47,7 @@ cmp.setup({
 		{ name = "nvim_lsp" }, -- lsp
 		{ name = "luasnip", max_item_count = 3 }, -- snippets
 		{ name = "buffer", max_item_count = 5 }, -- text within current buffer
-		{ name = "path" }, -- file system paths
+		{ name = "path", max_item_count = 3 }, -- file system paths
 	}),
 	-- Enable pictogram icons for lsp/autocompletion
 	formatting = {
