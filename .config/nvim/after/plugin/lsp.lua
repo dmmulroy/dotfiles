@@ -31,18 +31,6 @@ local function tsserver_on_publish_diagnostics_override(_, result, ctx, config)
 	vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
 end
 
--- Override ocamllsp cmd if it's in the current project
-local function ocamllsp_cmd_override()
-	local root = vim.fn.getcwd()
-	local ocamllsp_binary = root .. "/_opam/bin/ocamllsp"
-
-	if vim.fn.executable(ocamllsp_binary) == 1 then
-		return { ocamllsp_binary }
-	else
-		return { "ocamllsp" }
-	end
-end
-
 -- LSP servers to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
 	tsserver = {
@@ -65,11 +53,7 @@ local servers = {
 	bashls = {},
 	yamlls = {},
 	lua_ls = {},
-	ocamllsp = {
-		-- settings = {
-		-- 	cmd = ocamllsp_cmd_override(),
-		-- },
-	},
+	ocamllsp = {},
 }
 
 -- Setup mason so it can manage 3rd party LSP servers
@@ -141,9 +125,13 @@ null_ls.setup({
 		}),
 	},
 })
-
+--
 -- Turn on LSP status and progress information
-require("fidget").setup()
+require("fidget").setup({
+	text = {
+		spinner = "dots_negative",
+	},
+})
 
 -- Configure borderd for LspInfo ui
 require("lspconfig.ui.windows").default_options.border = "rounded"

@@ -50,6 +50,9 @@ packer.startup(function(use)
 		after = "nvim-treesitter",
 	})
 
+	-- Install nvim-notify for better notifications
+	use("rcarriga/nvim-notify")
+
 	-- Install LSP
 	use({
 		"neovim/nvim-lspconfig",
@@ -156,6 +159,8 @@ packer.startup(function(use)
 
 	-- Install Github Copilot
 	use("github/copilot.vim")
+
+	use("lewis6991/async.nvim")
 
 	if is_bootstrapped then
 		require("packer").sync()
