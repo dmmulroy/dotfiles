@@ -1,5 +1,5 @@
 require("toggleterm").setup({
-	open_mapping = "<leader>t",
+	open_mapping = "<leader>tt",
 	insert_mappings = false,
 	terminal_mappings = false,
 	float_opts = {

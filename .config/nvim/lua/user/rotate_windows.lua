@@ -1,5 +1,5 @@
 vim.api.nvim_create_user_command("RotateWindows", function()
-	local ignored_filetypes = { "NvimTree", "fidget", "Outline" }
+	local ignored_filetypes = { "NvimTree", "fidget", "Outline", "toggleterm" }
 	local window_numbers = vim.api.nvim_tabpage_list_wins(0)
 	local windows_to_rotate = {}
 

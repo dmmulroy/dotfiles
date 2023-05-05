@@ -6,8 +6,10 @@ require("neodev").setup()
 
 -- Override tsserver diagnostics to filter out specific messages
 local messages_to_filter = {
-	"This may be converted to an async function",
+	"This may be converted to an async function.",
 	"'_Assertion' is declared but never used.",
+	"The signature '(data: string): string' of 'atob' is deprecated.",
+	"The signature '(data: string): string' of 'btoa' is deprecated.",
 }
 
 local function tsserver_on_publish_diagnostics_override(_, result, ctx, config)
@@ -16,7 +18,7 @@ local function tsserver_on_publish_diagnostics_override(_, result, ctx, config)
 	for _, diagnostic in ipairs(result.diagnostics) do
 		local found = false
 		for _, message in ipairs(messages_to_filter) do
-			if string.find(diagnostic.message, message) then
+			if diagnostic.message == message then
 				found = true
 				break
 			end

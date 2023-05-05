@@ -160,7 +160,8 @@ packer.startup(function(use)
 	-- Install Github Copilot
 	use("github/copilot.vim")
 
-	use("lewis6991/async.nvim")
+	-- Install tsc.nvim to enable project-wide type checking and diagnostics
+	use({ "dmmulroy/tsc.nvim" })
 
 	if is_bootstrapped then
 		require("packer").sync()
