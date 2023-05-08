@@ -1,11 +1,27 @@
+require("catppuccin").setup({
+	integrations = {
+		cmp = true,
+		gitsigns = true,
+		harpoon = true,
+		illuminate = true,
+		indent_blankline = {
+			enabled = true,
+			colored_indent_levels = true,
+		},
+		mason = true,
+		native_lsp = { enabled = true },
+		notify = true,
+		nvimtree = true,
+		symbols_outline = true,
+		telescope = true,
+		treesitter = true,
+		treesitter_context = true,
+	},
+})
+
 vim.cmd.colorscheme("catppuccin-macchiato")
 
-local function update_hl(group, tbl)
-	local old_hl = vim.api.nvim_get_hl_by_name(group, true)
-	local new_hl = vim.tbl_extend("force", old_hl, tbl)
-	vim.api.nvim_set_hl(0, group, new_hl)
+-- Hide all semantic highlights until upstream issues are resolved (https://github.com/catppuccin/nvim/issues/480)
+for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+	vim.api.nvim_set_hl(0, group, {})
 end
-
-update_hl("Comment", { italic = true })
-update_hl("Constant", { italic = true })
-update_hl("Keyword", { italic = true })

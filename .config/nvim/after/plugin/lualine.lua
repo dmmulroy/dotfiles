@@ -15,6 +15,9 @@ local function truncate_branch_name(branch)
 end
 
 require("lualine").setup({
+	options = {
+		theme = "catppuccin",
+	},
 	sections = {
 		lualine_b = { { "branch", icon = "", fmt = truncate_branch_name }, "diff", "diagnostics" },
 		lualine_c = {

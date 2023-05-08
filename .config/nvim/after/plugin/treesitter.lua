@@ -13,7 +13,6 @@ require("nvim-treesitter.configs").setup({
 		"yaml",
 		"vim",
 		"graphql",
-		"help",
 		"bash",
 	},
 	sync_install = false,

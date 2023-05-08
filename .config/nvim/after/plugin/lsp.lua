@@ -70,23 +70,33 @@ require("mason-lspconfig").setup({
 	automatic_installation = { exclude = { "ocamllsp" } },
 })
 
+
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-local on_attach = function(_, buffer_number)
+local on_attach = function(client, buffer_number)
 	-- Pass the current buffer to map lsp keybinds
 	map_lsp_keybinds(buffer_number)
 
 	-- Create a command `:Format` local to the LSP buffer
 	vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
 		vim.lsp.buf.format({
-			filter = function(client)
+			filter = function(format_client)
 				-- Use Prettier to format TS/JS if it's available
-				return client.name ~= "tsserver" or not null_ls.is_registered("prettier")
+				return format_client.name ~= "tsserver" or not null_ls.is_registered("prettier")
 			end,
 		})
 	end, { desc = "LSP: Format current buffer with LSP" })
+
+	if client.server_capabilities.codeLensProvider then
+		vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "CursorHold" }, {
+			buffer = buffer_number,
+			callback = vim.lsp.codelens.refresh,
+			desc = "LSP: Refresh code lens",
+			group = vim.api.nvim_create_augroup("codelens", { clear = true }),
+		})
+	end
 end
 
 -- Iterate over our servers and set them up
@@ -125,13 +135,6 @@ null_ls.setup({
 				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
 			end,
 		}),
-	},
-})
---
--- Turn on LSP status and progress information
-require("fidget").setup({
-	text = {
-		spinner = "dots_negative",
 	},
 })
 

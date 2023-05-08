@@ -260,13 +260,15 @@ end
 nnoremap("<leader>so", ":SymbolsOutline<cr>")
 
 -- Vim Illuminate keybinds
-nnoremap("<leader>in", function()
+nnoremap("<leader>]", function()
 	illuminate.goto_next_reference()
-end, { desc = "[I]lluminate: Goto [N]ext reference" })
+	vim.api.nvim_feedkeys("zz", "n", false)
+end, { desc = "Illuminate: Goto next reference" })
 
-nnoremap("<leader>ip", function()
+nnoremap("<leader>[", function()
 	illuminate.goto_prev_reference()
-end, { desc = "[I]lluminate: Goto [P]revious reference" })
+	vim.api.nvim_feedkeys("zz", "n", false)
+end, { desc = "Illuminate: Goto previous reference" })
 
 -- Insert --
 -- Map jj to <esc>

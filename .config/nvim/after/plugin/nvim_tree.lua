@@ -4,6 +4,7 @@ vim.g.loaded_netrwPlugin = 1
 
 -- See *nvim-tree-default-mappings* for default kep binds
 require("nvim-tree").setup({
+	hijack_unnamed_buffer_when_opening = true,
 	update_focused_file = {
 		enable = true,
 	},
@@ -32,8 +33,16 @@ require("lsp-file-operations").setup()
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		local buffer_name = vim.api.nvim_buf_get_name(0)
-		if not (string.match(buffer_name, "COMMIT_EDITMSG") or string.match(buffer_name, "MERGE_MSG")) then
+		local is_commit_or_merge_msg = string.match(buffer_name, "COMMIT_EDITMSG")
+			or string.match(buffer_name, "MERGE_MSG")
+		local is_file_buffer = vim.fn.expand("%:p") ~= ""
+
+		if not is_commit_or_merge_msg then
 			require("nvim-tree.api").tree.open()
+			if is_file_buffer then
+				-- Focus on the file buffer
+				vim.cmd.wincmd("p")
+			end
 		end
 	end,
 })
