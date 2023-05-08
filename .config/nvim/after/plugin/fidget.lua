@@ -1,0 +1,6 @@
+-- Turn on LSP status and progress information
+-- require("fidget").setup({
+-- 	text = {
+-- 		spinner = "dots_negative",
+-- 	},
+-- })
