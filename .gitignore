@@ -6,3 +6,6 @@
 
 # Ignore tmux plugins
 .config/tmux/plugins
+
+# Ignore DS_Store files
+.DS_Store
