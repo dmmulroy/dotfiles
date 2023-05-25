@@ -58,9 +58,8 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 vim.opt.cursorline = true
 
 -- Set fold settings
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevel = 20
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
 
 -- Always keep 8 lines above/below cursor unless at start/end of file
 vim.opt.scrolloff = 8
@@ -71,3 +70,5 @@ vim.opt.colorcolumn = "80"
 -- Disable Copilot's tab mapping since it's mapped to nvim-cmp
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
+
+-- vim.g.kitty_navigator_no_mappings = 1

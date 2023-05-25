@@ -14,10 +14,15 @@ local M = {}
 nnoremap("<space>", "<nop>")
 
 -- Window navigation
-nnoremap("<C-j>", "<C-w>j")
-nnoremap("<C-k>", "<C-w>k")
-nnoremap("<C-l>", "<C-w>l")
-nnoremap("<C-h>", "<C-w>h")
+-- nnoremap("<C-j>", "<C-w>j")
+-- nnoremap("<C-k>", "<C-w>k")
+-- nnoremap("<C-l>", "<C-w>l")
+-- nnoremap("<C-h>", "<C-w>h")
+
+nnoremap("<C-j>", ":KittyNavigateDown<cr>")
+nnoremap("<C-k>", ":KittyNavigateUp<cr>")
+nnoremap("<C-l>", ":KittyNavigateRight<cr>")
+nnoremap("<C-h>", ":KittyNavigateLeft<cr>")
 
 -- Buffer navigation
 nnoremap("<A-l>", "<cmd>bnext<cr>")
@@ -252,6 +257,7 @@ M.map_lsp_keybinds = function(buffer_number)
 	-- See `:help K` for why this keymap
 	nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
 	nnoremap("<leader>k", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
+	inoremap("<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
 
 	-- Lesser used LSP functionality
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })

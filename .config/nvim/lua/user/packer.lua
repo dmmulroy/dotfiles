@@ -163,6 +163,9 @@ packer.startup(function(use)
 	-- Install tsc.nvim to enable project-wide type checking and diagnostics
 	use({ "dmmulroy/tsc.nvim" })
 
+	-- Install vim-kitty-navigator to enable better navigation between neovim and kitty
+	use({ "knubie/vim-kitty-navigator" })
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end
