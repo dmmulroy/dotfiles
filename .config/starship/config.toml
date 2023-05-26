@@ -1,3 +1,7 @@
+[character]
+success_symbol = '[󰘧](bold green)'
+error_symbol = '[󰘧](bold red)'
+
 [directory]
 truncate_to_repo = false
 
@@ -10,3 +14,6 @@ symbol = " "
 
 [git_branch]
 symbol = " "
+
+[buf]
+disabled = true

@@ -13,20 +13,41 @@ local M = {}
 -- Disable Space bar since it'll be used as the leader key
 nnoremap("<space>", "<nop>")
 
--- Window navigation
--- nnoremap("<C-j>", "<C-w>j")
--- nnoremap("<C-k>", "<C-w>k")
--- nnoremap("<C-l>", "<C-w>l")
--- nnoremap("<C-h>", "<C-w>h")
+-- Window +  better kitty navigation
+nnoremap("<C-j>", function()
+	if vim.fn.exists(":KittyNavigateDown") ~= 0 then
+		vim.cmd.KittyNavigateDown()
+	else
+		vim.cmd.wincmd("j")
+	end
+end)
 
-nnoremap("<C-j>", ":KittyNavigateDown<cr>")
-nnoremap("<C-k>", ":KittyNavigateUp<cr>")
-nnoremap("<C-l>", ":KittyNavigateRight<cr>")
-nnoremap("<C-h>", ":KittyNavigateLeft<cr>")
+nnoremap("<C-k>", function()
+	if vim.fn.exists(":KittyNavigateUp") ~= 0 then
+		vim.cmd.KittyNavigateUp()
+	else
+		vim.cmd.wincmd("k")
+	end
+end)
 
--- Buffer navigation
-nnoremap("<A-l>", "<cmd>bnext<cr>")
-nnoremap("<A-h>", "<cmd>bprevious<cr>")
+nnoremap("<C-l>", function()
+	if vim.fn.exists(":KittyNavigateRight") ~= 0 then
+		vim.cmd.KittyNavigateRight()
+	else
+		vim.cmd.wincmd("l")
+	end
+end)
+
+nnoremap("<C-h>", function()
+	if vim.fn.exists(":KittyNavigateLeft") ~= 0 then
+		vim.cmd.KittyNavigateLeft()
+	else
+		vim.cmd.wincmd("h")
+	end
+end)
+
+-- Swap between last two buffers
+nnoremap("<C-'>", "<C-^>", { desc = "Switch to last buffer" })
 
 -- Save with leader key
 nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
@@ -305,16 +326,16 @@ vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Terminal --
 -- Enter normal mode while in a terminal
-tnoremap("<esc>", [[<C-\><C-n>]])
-tnoremap("jj", [[<C-\><C-n>]])
+-- tnoremap("<esc>", [[<C-\><C-n>]])
+-- tnoremap("jj", [[<C-\><C-n>]])
 
 -- Window navigation from terminal
-tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
-tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
-tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
-tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
+-- tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
+-- tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
+-- tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
+-- tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
 
 -- Reenable default <space> functionality to prevent input delay
-tnoremap("<space>", "<space>")
+-- tnoremap("<space>", "<space>")
 
 return M

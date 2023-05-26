@@ -32,6 +32,35 @@ function fvim() {
     fi
 }
 
+function kkb () {
+  bat --file-name "Kitty key binds" -f << EOF
++--------------------------------+------------------+
+| Key binds                      |                  |
++--------------------------------+------------------+
+| General                        |                  |
+| New kitty instance             | cmd + n          |
+| Open URL                       | ctrl + shift + e |
++--------------------------------+------------------+
+| Tabs                           |                  |
+| New tab                        | cmd + t          |
+| Set tab title                  | cmd + shift + i  |
+| Move tab forward               | ctrl + shift + . |
+| Move tab backward              | ctrl + shift + , |
+| Next tab                       | cmd + shift + ]  |
+| Previous tab                   | cmd + shift + [  |
+| Close tab                      | cmd + w          |
++--------------------------------+------------------+
+| Windows                        |                  |
+| New window                     | cmd + enter      |
+| Close window                   | cmd + shift + d  |
+| Change window layout           | ctrl + shift + l |
+| Resize window                  | ctrl + shift + r |
+| Move window ccw                | ctrl + shift + f |
+| Move window cw                 | ctrl + shift + b |
++--------------------------------+------------------+
+EOF
+}
+
 # fzf
 export FZF_DEFAULT_OPTS="--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down --preview 'bat --color=always{}'"
 
@@ -60,4 +89,12 @@ test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /de
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# ssh-agent# Start the ssh-agent and add all identities
+eval "$(ssh-agent -s)" > /dev/null 2>&1
+ssh-add  --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
+ssh-add  --apple-use-keychain ~/.ssh/id_ed25519_skolem > /dev/null 2>&1
 
+
+
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/homebrew/lib/pkgconfig:/opt/homebrew/opt/zlib/lib/pkgconfig
+export LIBRARY_PATH="$(brew --prefix gcc)/lib/gcc/current:/opt/homebrew/opt/zlib/lib"

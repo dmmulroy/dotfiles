@@ -71,4 +71,5 @@ vim.opt.colorcolumn = "80"
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 
--- vim.g.kitty_navigator_no_mappings = 1
+-- Disable vim-kitty-navigator default mappings
+vim.g.kitty_navigator_no_mappings = 1
