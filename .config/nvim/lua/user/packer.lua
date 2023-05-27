@@ -148,9 +148,6 @@ packer.startup(function(use)
 	-- Install symbol-outine for a sidebar toggle for the current buffers symbols
 	use("simrat39/symbols-outline.nvim")
 
-	-- Install toggleterm for better terminal support within neovim
-	-- use("akinsho/toggleterm.nvim")
-
 	-- Install context-commentstring to enable jsx commenting is ts/js/tsx/jsx files
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 
@@ -164,8 +161,8 @@ packer.startup(function(use)
 	use({ "dmmulroy/tsc.nvim" })
 
 	-- Install vim-kitty-navigator to enable better navigation between neovim and kitty
-	use("knubie/vim-kitty-navigator")
-	-- use({ "dmmulroy/vim-kitty-navigator" })
+	-- use("knubie/vim-kitty-navigator")
+	use({ "dmmulroy/vim-kitty-navigator" })
 
 	if is_bootstrapped then
 		require("packer").sync()

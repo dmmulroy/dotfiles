@@ -10,7 +10,7 @@ require("nvim-tree").setup({
 	},
 	actions = {
 		expand_all = {
-			exclude = { "node_modules", ".git", ".vscode", ".github", "dist", "build" },
+			exclude = { "node_modules", ".git", ".vscode", ".github", "dist", "build", "_opam" },
 		},
 	},
 	git = {
@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			or string.match(buffer_name, "MERGE_MSG")
 		local is_file_buffer = vim.fn.expand("%:p") ~= ""
 
-		if not is_commit_or_merge_msg then
+		if not is_commit_or_merge_msg and not vim.g.is_kitty_scrollback then
 			require("nvim-tree.api").tree.open()
 			if is_file_buffer then
 				-- Focus on the file buffer

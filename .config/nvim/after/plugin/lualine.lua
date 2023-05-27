@@ -33,6 +33,16 @@ local function harpoon_component()
 	return string.format("󱡅 %s/%d", current_mark, total_marks)
 end
 
+local function kitty_component()
+	if vim.g.kitty_layout_is_stack then
+		return " "
+	end
+
+	return ""
+end
+
+-- lualine_x = {'encoding', 'fileformat', 'filetype'},
+
 require("lualine").setup({
 	options = {
 		theme = "catppuccin",
@@ -41,12 +51,16 @@ require("lualine").setup({
 	sections = {
 		lualine_b = {
 			{ "branch", icon = "", fmt = truncate_branch_name },
-			{ harpoon_component },
+			harpoon_component,
 			"diff",
 			"diagnostics",
 		},
 		lualine_c = {
 			{ "filename", path = 1 },
+		},
+		lualine_x = {
+			kitty_component,
+			"filetype",
 		},
 	},
 })

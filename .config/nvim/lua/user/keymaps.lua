@@ -1,8 +1,8 @@
 local nnoremap = require("user.keymap_utils").nnoremap
 local vnoremap = require("user.keymap_utils").vnoremap
 local inoremap = require("user.keymap_utils").inoremap
-local xnoremap = require("user.keymap_utils").xnoremap
 local tnoremap = require("user.keymap_utils").tnoremap
+local xnoremap = require("user.keymap_utils").xnoremap
 local harpoon_ui = require("harpoon.ui")
 local harpoon_mark = require("harpoon.mark")
 local illuminate = require("illuminate")
@@ -146,10 +146,6 @@ nnoremap("<leader>co", ":copen<cr>zz")
 
 -- Close the qflist
 nnoremap("<leader>cc", ":cclose<cr>zz")
-
--- Increment/Decrement numbers w/ leader key
-nnoremap("<leader>=", "<C-a>")
-nnoremap("<leader>-", "<C-x>")
 
 -- Map MaximizerToggle (szw/vim-maximizer) to leader-m
 nnoremap("<leader>m", ":MaximizerToggle<cr>")
@@ -326,16 +322,16 @@ vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Terminal --
 -- Enter normal mode while in a terminal
--- tnoremap("<esc>", [[<C-\><C-n>]])
--- tnoremap("jj", [[<C-\><C-n>]])
+tnoremap("<esc>", [[<C-\><C-n>]])
+tnoremap("jj", [[<C-\><C-n>]])
 
 -- Window navigation from terminal
--- tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
--- tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
--- tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
--- tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
+tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
+tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
+tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
+tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
 
 -- Reenable default <space> functionality to prevent input delay
--- tnoremap("<space>", "<space>")
+tnoremap("<space>", "<space>")
 
 return M
