@@ -19,8 +19,6 @@ alias cat="bat"
 alias gmo='git checkout $(git remote show origin | grep "HEAD branch" | cut -d " " -f5) && git pull && git checkout - && git merge $(git remote show origin | grep "HEAD branch" | cut -d " " -f5)'
 # grb -> git checkout recent branch
 alias grb='git branch --sort=-committerdate | grep -v "$(git branch --show-current)" | fzf --header "Checkout Recent Branch ( $(git branch --show-current))" --preview "git diff {1} --color=always" --pointer="" | xargs git checkout'
-# hist -> Better history search
-alias hist='history | cut -c 8- | tail -r | fzf --header "History - Press Enter to copy command to clipboard" --pointer="" --bind "enter:execute-silent(echo -n {1..} | pbcopy)+abort"'
 
 # functions
 # fvim -> find and open a file in vim
@@ -32,6 +30,7 @@ function fvim() {
     fi
 }
 
+# kbb -> pretty print kitty key binds
 function kkb () {
   bat --file-name "Kitty key binds" -f << EOF
 +--------------------------------+------------------+
@@ -39,7 +38,26 @@ function kkb () {
 +--------------------------------+------------------+
 | General                        |                  |
 | New kitty instance             | cmd + n          |
+| History                        | ctrl + r         |
 | Open URL                       | ctrl + shift + e |
++--------------------------------+------------------+
+| Windows                        |                  |
+| New window                     | cmd + enter      |
+| Close window                   | cmd + backspace  |
+| Change window layout           | cmd + '          |
+| Resize window taller           | cmd + =          |
+| Resize window shorter          | cmd + -          |
+| Resize window wider            | cmd + 0          |
+| Resize window narrower         | cmd + 9          |
+| Reset window size              | cmd + 8          |
+| Move window up                 | shift + up       |
+| Move window down               | shift + down     |
+| Move window left               | shift + left     |
+| Move window right              | shift + right    |
+| Move to top neighboring window | ctrl + k         |
+| Move to bottom neighboring win | ctrl + j         |
+| Move to left neighboring win   | ctrl + h         |
+| Move to right neighboring win  | ctrl + l         |
 +--------------------------------+------------------+
 | Tabs                           |                  |
 | New tab                        | cmd + t          |
@@ -49,14 +67,6 @@ function kkb () {
 | Next tab                       | cmd + shift + ]  |
 | Previous tab                   | cmd + shift + [  |
 | Close tab                      | cmd + w          |
-+--------------------------------+------------------+
-| Windows                        |                  |
-| New window                     | cmd + enter      |
-| Close window                   | cmd + shift + d  |
-| Change window layout           | ctrl + shift + l |
-| Resize window                  | ctrl + shift + r |
-| Move window ccw                | ctrl + shift + f |
-| Move window cw                 | ctrl + shift + b |
 +--------------------------------+------------------+
 EOF
 }
