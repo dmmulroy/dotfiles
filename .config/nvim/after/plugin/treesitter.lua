@@ -10,6 +10,7 @@ require("nvim-treesitter.configs").setup({
 		"prisma",
 		"markdown",
 		"ocaml",
+		"ocaml_interface",
 		"yaml",
 		"vim",
 		"graphql",
@@ -21,6 +22,7 @@ require("nvim-treesitter.configs").setup({
 	},
 	indent = {
 		enable = true,
+		disable = { "ocaml", "ocaml_interface" },
 	},
 	autopairs = {
 		enable = true,

@@ -17,3 +17,11 @@ symbol = " "
 
 [buf]
 disabled = true
+
+[custom.kitty_layout]
+command = 'kitty @ kitten get_layout.py'
+when = ''' [ "$(kitty @ kitten get_layout.py)" = "stack" ] '''
+symbol = " "
+format = 'in [$symbol]($style)'
+style = '#c6a0f6'
+shell = ['zsh']
