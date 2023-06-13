@@ -7,5 +7,6 @@ require("illuminate").configure({
 		"toggleterm",
 		"DressingSelect",
 		"TelescopePrompt",
+		"harpoon",
 	},
 })
