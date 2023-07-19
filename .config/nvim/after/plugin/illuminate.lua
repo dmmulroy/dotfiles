@@ -1,12 +1,13 @@
 require("illuminate").configure({
 	under_cursor = false,
 	filetypes_denylist = {
-		"alpha",
+		"DressingSelect",
 		"NvimTree",
 		"Outline",
-		"toggleterm",
-		"DressingSelect",
 		"TelescopePrompt",
+		"alpha",
 		"harpoon",
+		"toggleterm",
+		"neo-tree",
 	},
 })

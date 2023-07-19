@@ -59,7 +59,9 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
 -- Map nvim-tree to <leader>e
-nnoremap("<leader>e", "<cmd>NvimTreeFindFileToggle<cr>")
+-- nnoremap("<leader>e", "<cmd>NvimTreeFindFileToggle<cr>")
+-- Map neo-tree to <leader>e
+nnoremap("<leader>e", "<cmd>Neotree toggle<cr>")
 
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
@@ -76,7 +78,11 @@ nnoremap("%", "%zz")
 nnoremap("*", "*zz")
 
 -- Press 'S' for quick find/replace for the word under the cursor
-nnoremap("S", ":%s/<C-r><C-w>//gI<Left><Left><Left>")
+nnoremap("S", function()
+	local cmd = ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>"
+	local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+	vim.api.nvim_feedkeys(keys, "n", false)
+end)
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 nnoremap("L", "$")

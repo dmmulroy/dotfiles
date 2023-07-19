@@ -20,6 +20,7 @@ require("mason-lspconfig").setup({
 local messages_to_filter = {
 	"This may be converted to an async function.",
 	"'_Assertion' is declared but never used.",
+	"'__Assertion' is declared but never used.",
 	"The signature '(data: string): string' of 'atob' is deprecated.",
 	"The signature '(data: string): string' of 'btoa' is deprecated.",
 }
