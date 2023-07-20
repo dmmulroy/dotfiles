@@ -58,8 +58,6 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
--- Map nvim-tree to <leader>e
--- nnoremap("<leader>e", "<cmd>NvimTreeFindFileToggle<cr>")
 -- Map neo-tree to <leader>e
 nnoremap("<leader>e", "<cmd>Neotree toggle<cr>")
 
@@ -76,6 +74,7 @@ nnoremap("<C-i>", "<C-i>zz")
 nnoremap("<C-o>", "<C-o>zz")
 nnoremap("%", "%zz")
 nnoremap("*", "*zz")
+nnoremap("#", "#zz")
 
 -- Press 'S' for quick find/replace for the word under the cursor
 nnoremap("S", function()

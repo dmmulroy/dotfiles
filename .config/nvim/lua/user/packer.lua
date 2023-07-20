@@ -102,25 +102,17 @@ packer.startup(function(use)
 		cond = vim.fn.executable("make") == 1,
 	})
 
-	-- Install nvim-tree for a vscode-like file tree/explorer
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			-- vscode icones
-			"nvim-tree/nvim-web-devicons",
-			-- Integrate lsp actions with file operations
-			"antosha417/nvim-lsp-file-operations",
-		},
-		tag = "nightly",
-	})
-
+	-- Install neo-tree for a vscode-like file tree/explorer
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
 		requires = {
-			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
+			{
+				"s1n7ax/nvim-window-picker",
+				tag = "v1.*",
+			},
 		},
 	})
 
