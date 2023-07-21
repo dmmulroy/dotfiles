@@ -57,6 +57,7 @@ local servers = {
 	ocamllsp = {},
 	prismals = {},
 	pyright = {},
+	solidity = {},
 	sqlls = {},
 	tailwindcss = {},
 	tsserver = {

@@ -46,6 +46,20 @@ local function recursively_open_nodes(state)
 	traverse_and_apply(state, node, _open_node)
 end
 
+-- Enable window picker for neo-tree to select which window to load the file in
+-- with the 'w' keybinding
+require("window-picker").setup({
+	hint = "floating-big-letter",
+	filter_rules = {
+		bo = {
+			-- ignore these filetypes
+			filetype = { "neo-tree", "neo-tree-popup", "notify" },
+			-- ignore these buftypes
+			buftype = { "terminal", "quickfix" },
+		},
+	},
+})
+
 require("neo-tree").setup({
 	commands = {
 		open_or_focus_preview = open_or_focus_preview,
@@ -53,7 +67,20 @@ require("neo-tree").setup({
 		close_node = close_node,
 		recursively_open_nodes = recursively_open_nodes,
 	},
-	default_component_configs = {},
+	default_component_configs = {
+		diagnostics = {
+			symbols = {
+				error = "󰅚",
+				warn = "󰀪",
+				info = "󰋽",
+				hint = "󰌶",
+			},
+		},
+		icon = {
+			folder_empty = "",
+			folder_empt_open = "",
+		},
+	},
 	event_handlers = {},
 	filesystem = {
 		filtered_items = {
@@ -77,8 +104,14 @@ require("neo-tree").setup({
 		window = {
 			mappings = {
 				["<bs>"] = "close_node",
+				["!"] = "navigate_up",
 			},
 		},
+	},
+	open_files_do_not_replace_types = { "terminal", "qf", "fidget", "Outline", "qf", "notify" },
+	popup_border_style = "rounded",
+	source_selector = {
+		winbar = true,
 	},
 	window = {
 		mappings = {
@@ -94,6 +127,7 @@ require("neo-tree").setup({
 })
 
 -- TODO: Add event handler for file_renamed
+-- PR opened to nvim-lsp-file-operations: https://github.com/antosha417/nvim-lsp-file-operations/pull/14
 -- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1050
 -- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/593
 -- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/308#issuecomment-1304765940

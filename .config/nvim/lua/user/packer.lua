@@ -111,7 +111,7 @@ packer.startup(function(use)
 			"MunifTanjim/nui.nvim",
 			{
 				"s1n7ax/nvim-window-picker",
-				tag = "v1.*",
+				tag = "v2.*",
 			},
 		},
 	})
