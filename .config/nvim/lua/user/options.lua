@@ -68,8 +68,8 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 
 -- Disable Copilot's tab mapping since it's mapped to nvim-cmp
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
+-- vim.g.copilot_no_tab_map = true
+-- vim.g.copilot_assume_mapped = true
 
 -- Disable vim-kitty-navigator default mappings
 vim.g.kitty_navigator_no_mappings = 1

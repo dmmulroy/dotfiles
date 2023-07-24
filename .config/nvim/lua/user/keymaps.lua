@@ -60,6 +60,8 @@ nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
 -- Map neo-tree to <leader>e
 nnoremap("<leader>e", "<cmd>Neotree toggle<cr>")
+-- Focus on current buffer in neo-tree
+nnoremap("<leader>E", "<cmd>Neotree action=focus<cr>")
 
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
@@ -300,15 +302,14 @@ nnoremap("<leader>[", function()
 	vim.api.nvim_feedkeys("zz", "n", false)
 end, { desc = "Illuminate: Goto previous reference" })
 
+-- Open Copilot panel
+nnoremap("<leader>oc", function()
+	require("copilot.panel").open()
+end, { desc = "[O]pen [C]opilot panel" })
+
 -- Insert --
 -- Map jj to <esc>
 inoremap("jj", "<esc>")
-
--- Remap copilot to use <C-/> instead of <Tab> since <Tab> is used for completion
-inoremap("<C-/>", function()
-	local copilot_keys = vim.fn["copilot#Accept"]("")
-	vim.api.nvim_feedkeys(copilot_keys, "i", true)
-end, { silent = true })
 
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key
@@ -321,7 +322,7 @@ vnoremap("H", "^")
 -- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
 
--- Move selected text up/down in visual mode (TODO: this does not work well, find another solution)
+-- Move selected text up/down in visual mode
 vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
 vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 

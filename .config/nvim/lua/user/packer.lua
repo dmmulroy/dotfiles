@@ -157,7 +157,8 @@ packer.startup(function(use)
 	use("RRethy/vim-illuminate")
 
 	-- Install Github Copilot
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
+	use({ "zbirenbaum/copilot.lua" })
 
 	-- Install tsc.nvim to enable project-wide type checking and diagnostics
 	use({ "dmmulroy/tsc.nvim" })
