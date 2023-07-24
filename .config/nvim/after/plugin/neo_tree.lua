@@ -126,6 +126,9 @@ require("neo-tree").setup({
 	},
 })
 
+-- Setup LSP file operations to enable lsp rename in neo-tree
+require("lsp-file-operations").setup()
+
 -- TODO: Add event handler for file_renamed
 -- PR opened to nvim-lsp-file-operations: https://github.com/antosha417/nvim-lsp-file-operations/pull/14
 -- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1050

@@ -102,6 +102,15 @@ packer.startup(function(use)
 		cond = vim.fn.executable("make") == 1,
 	})
 
+	-- Install nvim-lsp-file-operations for file operations via lsp in the file tree
+	use({
+		"antosha417/nvim-lsp-file-operations",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-neo-tree/neo-tree.nvim",
+		},
+	})
+
 	-- Install neo-tree for a vscode-like file tree/explorer
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
