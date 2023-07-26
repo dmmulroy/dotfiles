@@ -100,7 +100,6 @@ require("neo-tree").setup({
 		follow_current_file = {
 			enabled = true,
 		},
-		hijack_netrw_behavior = "open_current",
 		window = {
 			mappings = {
 				["<bs>"] = "close_node",
