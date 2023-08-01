@@ -120,6 +120,7 @@ require("neo-tree").setup({
 			["z"] = "close_all_subnodes",
 			["Z"] = "close_all_nodes",
 			["P"] = { "open_or_focus_preview", config = { use_float = true } },
+			["/"] = "filter_on_submit",
 		},
 		width = 35,
 	},

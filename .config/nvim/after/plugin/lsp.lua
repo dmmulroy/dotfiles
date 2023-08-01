@@ -51,6 +51,7 @@ local servers = {
 	bashls = {},
 	cssls = {},
 	graphql = {},
+	html = {},
 	jsonls = {},
 	lua_ls = {},
 	marksman = {},
