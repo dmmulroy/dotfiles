@@ -77,7 +77,7 @@ NVIM_APPNAME=dmmulroy/dotfiles/.config/nvim nvim
 + [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
 ### plugin-manager
 
-+ [wbthomason/packer.nvim](https://dotfyle.com/plugins/wbthomason/packer.nvim)
++ [folke/lazy](https://github.com/folke/lazy.nvim)
 ### programming-languages-support
 
 + [dmmulroy/tsc.nvim](https://dotfyle.com/plugins/dmmulroy/tsc.nvim)
