@@ -170,11 +170,25 @@ packer.startup(function(use)
 	use({ "zbirenbaum/copilot.lua" })
 
 	-- Install tsc.nvim to enable project-wide type checking and diagnostics
-	use({ "dmmulroy/tsc.nvim" })
+	-- use({ "dmmulroy/tsc.nvim" })
+	use("~/Code/tsc.nvim")
 
 	-- Install vim-kitty-navigator to enable better navigation between neovim and kitty
 	-- use("knubie/vim-kitty-navigator")
 	use({ "dmmulroy/vim-kitty-navigator" })
+
+	-- Install nvim-spectre for global find/replace
+	use({
+		"nvim-pack/nvim-spectre",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
+
+	use("stevearc/oil.nvim")
+
+	--Install nvim-ufo for better folds
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
 	if is_bootstrapped then
 		require("packer").sync()

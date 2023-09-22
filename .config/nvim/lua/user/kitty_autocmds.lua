@@ -1,3 +1,8 @@
+local set_kitty_layout_is_stack = vim.schedule_wrap(function()
+	local layout = vim.fn.system("kitty @ kitten get_layout.py")
+	vim.g.kitty_layout_is_stack = string.match(layout, "stack")
+end)
+
 -- Check if we launched into neovim from kitty in scrollback mode
 -- If so, jump to the bottom of the buffer
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -9,10 +14,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			end, 250)
 		end
 
-		-- vim.schedule(function()
-		-- 	local layout = vim.fn.system("kitty @ kitten get_layout.py")
-		-- 	vim.g.kitty_layout_is_stack = string.match(layout, "stack")
-		-- end)
+		set_kitty_layout_is_stack()
 	end,
 })
 
@@ -23,11 +25,6 @@ vim.api.nvim_create_autocmd("VimLeave", {
 	end,
 })
 
--- vim.api.nvim_create_autocmd("WinResized", {
--- 	callback = function()
--- 		vim.schedule(function()
--- 			local layout = vim.fn.system("kitty @ kitten get_layout.py")
--- 			vim.g.kitty_layout_is_stack = string.match(layout, "stack")
--- 		end)
--- 	end,
--- })
+vim.api.nvim_create_autocmd("VimResized", {
+	callback = set_kitty_layout_is_stack,
+})

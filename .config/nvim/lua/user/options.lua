@@ -11,6 +11,9 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.shiftwidth = 2
 
+-- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
+vim.opt.breakindent = true
+
 -- Enable incremental searching
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
@@ -32,9 +35,6 @@ vim.opt.mouse = "a"
 -- Enable ignorecase + smartcase for better searching
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
--- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
-vim.opt.breakindent = true
 
 -- Decrease updatetime to 200ms
 vim.opt.updatetime = 50
@@ -58,8 +58,12 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 vim.opt.cursorline = true
 
 -- Set fold settings
-vim.opt.foldmethod = "indent"
+-- These options were reccommended by nvim-ufo
+-- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- Always keep 8 lines above/below cursor unless at start/end of file
 vim.opt.scrolloff = 8

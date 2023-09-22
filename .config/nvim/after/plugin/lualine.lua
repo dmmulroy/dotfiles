@@ -33,13 +33,13 @@ local function harpoon_component()
 	return string.format("󱡅 %s/%d", current_mark, total_marks)
 end
 
--- local function kitty_component()
--- 	if vim.g.kitty_layout_is_stack then
--- 		return " "
--- 	end
---
--- 	return ""
--- end
+local function kitty_component()
+	if vim.g.kitty_layout_is_stack then
+		return " "
+	end
+
+	return ""
+end
 
 require("lualine").setup({
 	options = {
@@ -57,7 +57,7 @@ require("lualine").setup({
 			{ "filename", path = 1 },
 		},
 		lualine_x = {
-			-- kitty_component,
+			kitty_component,
 			"filetype",
 		},
 	},

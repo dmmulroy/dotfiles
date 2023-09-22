@@ -104,6 +104,7 @@ require("neo-tree").setup({
 			mappings = {
 				["<bs>"] = "close_node",
 				["!"] = "navigate_up",
+				["/"] = "filter_on_submit",
 			},
 		},
 	},
@@ -120,7 +121,6 @@ require("neo-tree").setup({
 			["z"] = "close_all_subnodes",
 			["Z"] = "close_all_nodes",
 			["P"] = { "open_or_focus_preview", config = { use_float = true } },
-			["/"] = "filter_on_submit",
 		},
 		width = 35,
 	},
@@ -128,10 +128,3 @@ require("neo-tree").setup({
 
 -- Setup LSP file operations to enable lsp rename in neo-tree
 require("lsp-file-operations").setup()
-
--- TODO: Add event handler for file_renamed
--- PR opened to nvim-lsp-file-operations: https://github.com/antosha417/nvim-lsp-file-operations/pull/14
--- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1050
--- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/593
--- See: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/308#issuecomment-1304765940
--- See: https://github.com/antosha417/nvim-lsp-file-operations/blob/master/lua/lsp-file-operations/will-rename.lua

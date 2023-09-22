@@ -6,6 +6,7 @@ local xnoremap = require("user.keymap_utils").xnoremap
 local harpoon_ui = require("harpoon.ui")
 local harpoon_mark = require("harpoon.mark")
 local illuminate = require("illuminate")
+local utils = require("user.utils")
 
 local M = {}
 
@@ -47,7 +48,7 @@ nnoremap("<C-h>", function()
 end)
 
 -- Swap between last two buffers
-nnoremap("<C-'>", "<C-^>", { desc = "Switch to last buffer" })
+nnoremap("<leader>'", "<C-^>", { desc = "Switch to last buffer" })
 
 -- Save with leader key
 nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
@@ -216,6 +217,25 @@ end)
 
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
+nnoremap("<leader>gf", function()
+	local cmd = {
+		"sort",
+		"-u",
+		"<(git diff --name-only --cached)",
+		"<(git diff --name-only)",
+		"<(git diff --name-only --diff-filter=U)",
+	}
+
+	if not utils.is_git_directory() then
+		vim.notify(
+			"Current project is not a git directory",
+			vim.log.levels.WARN,
+			{ title = "Telescope Git Files", git_command = cmd }
+		)
+	else
+		require("telescope.builtin").git_files()
+	end
+end, { desc = "Search [G]it [F]iles" })
 
 -- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
@@ -227,6 +247,7 @@ nnoremap("<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earc
 nnoremap("<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
 nnoremap("<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
 nnoremap("<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
+nnoremap("<leader>sd", require("telescope.builtin").git_files, { desc = "[S]earch [D]iagnostics" })
 
 nnoremap("<leader>sc", function()
 	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
@@ -306,6 +327,10 @@ end, { desc = "Illuminate: Goto previous reference" })
 nnoremap("<leader>oc", function()
 	require("copilot.panel").open()
 end, { desc = "[O]pen [C]opilot panel" })
+
+-- nvim-ufo keybinds
+nnoremap("zR", require("ufo").openAllFolds)
+nnoremap("zM", require("ufo").closeAllFolds)
 
 -- Insert --
 -- Map jj to <esc>
