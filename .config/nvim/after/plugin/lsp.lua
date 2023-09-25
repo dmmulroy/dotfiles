@@ -71,9 +71,8 @@ local servers = {
 	tailwindcss = {},
 	tsserver = {
 		settings = {
-			Lua = {
-				workspace = { checkThirdParty = false },
-				telemetry = { enabled = false },
+			experimental = {
+				enableProjectDiagnostics = true,
 			},
 		},
 		handlers = {
