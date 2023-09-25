@@ -54,7 +54,14 @@ local servers = {
 	graphql = {},
 	html = {},
 	jsonls = {},
-	lua_ls = {},
+	lua_ls = {
+		settings = {
+			Lua = {
+				workspace = { checkThirdParty = false },
+				telemetry = { enabled = false },
+			},
+		},
+	},
 	marksman = {},
 	ocamllsp = {},
 	prismals = {},
@@ -64,8 +71,9 @@ local servers = {
 	tailwindcss = {},
 	tsserver = {
 		settings = {
-			experimental = {
-				enableProjectDiagnostics = true,
+			Lua = {
+				workspace = { checkThirdParty = false },
+				telemetry = { enabled = false },
 			},
 		},
 		handlers = {

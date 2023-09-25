@@ -86,6 +86,21 @@ nnoremap("S", function()
 	vim.api.nvim_feedkeys(keys, "n", false)
 end)
 
+-- Open Spectre for global find/replace
+nnoremap("<leader>S", function()
+	require("spectre").toggle()
+end)
+
+-- Open Spectre for global find/replace for the word under the cursor in normal mode
+nnoremap("<leader>sw", function()
+	require("spectre").open_visual({ select_word = true })
+end, { desc = "Search current word" })
+
+-- Open Spectre for global find/replace for the word under the cursor in visual mode
+vnoremap("<leader>sw", function()
+	require("spectre").open_visual({ select_word = true })
+end, { desc = "Search current word" })
+
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 nnoremap("L", "$")
 nnoremap("H", "^")
@@ -325,7 +340,7 @@ end, { desc = "Illuminate: Goto previous reference" })
 
 -- Open Copilot panel
 nnoremap("<leader>oc", function()
-	require("copilot.panel").open()
+	require("copilot.panel").open({})
 end, { desc = "[O]pen [C]opilot panel" })
 
 -- nvim-ufo keybinds
