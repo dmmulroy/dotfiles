@@ -68,7 +68,14 @@ local servers = {
 	pyright = {},
 	solidity = {},
 	sqlls = {},
-	tailwindcss = {},
+	tailwindcss = {
+		filetypes = { "ocaml", "ml" },
+		settings = {
+			tailwindCSS = {
+				classAttributes = { "a_class [" },
+			},
+		},
+	},
 	tsserver = {
 		settings = {
 			experimental = {
@@ -119,10 +126,11 @@ end
 -- Iterate over our servers and set them up
 for name, config in pairs(servers) do
 	require("lspconfig")[name].setup({
-		on_attach = on_attach,
 		capabilities = default_capabilities,
-		settings = config.settings,
+		filetypes = config.filetypes,
 		handlers = vim.tbl_deep_extend("force", {}, default_handlers, config.handlers or {}),
+		on_attach = on_attach,
+		settings = config.settings,
 	})
 end
 

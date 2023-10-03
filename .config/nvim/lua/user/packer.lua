@@ -135,7 +135,7 @@ packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 
 	-- Install indent_blankline to style indentation
-	use("lukas-reineke/indent-blankline.nvim")
+	use({ "lukas-reineke/indent-blankline.nvim" })
 
 	-- Install nvim-autopairs  and nvim-ts-autotag to auto close brackets & tags
 	use("windwp/nvim-autopairs")

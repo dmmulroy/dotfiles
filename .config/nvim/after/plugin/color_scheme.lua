@@ -5,8 +5,9 @@ require("catppuccin").setup({
 		harpoon = true,
 		illuminate = true,
 		indent_blankline = {
-			enabled = true,
-			colored_indent_levels = true,
+			enabled = false,
+			scope_color = "sapphire",
+			colored_indent_levels = false,
 		},
 		mason = true,
 		native_lsp = { enabled = true },

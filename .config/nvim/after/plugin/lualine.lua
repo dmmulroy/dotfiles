@@ -1,4 +1,5 @@
 local harpoon = require("harpoon.mark")
+local theme = require("catppuccin.palettes").get_palette("macchiato")
 
 local function truncate_branch_name(branch)
 	if not branch or branch == "" then
