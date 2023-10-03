@@ -68,14 +68,7 @@ local servers = {
 	pyright = {},
 	solidity = {},
 	sqlls = {},
-	tailwindcss = {
-		filetypes = { "ocaml", "ml" },
-		settings = {
-			tailwindCSS = {
-				classAttributes = { "a_class [" },
-			},
-		},
-	},
+	tailwindcss = {},
 	tsserver = {
 		settings = {
 			experimental = {
