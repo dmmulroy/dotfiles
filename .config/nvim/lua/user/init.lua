@@ -1,3 +1,4 @@
+require("user.keymaps_lua")
 require("user.packer")
 require("user.options")
 require("user.keymaps")
