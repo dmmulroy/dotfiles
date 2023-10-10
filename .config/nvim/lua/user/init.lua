@@ -1,6 +1,6 @@
-require("user.keymaps_lua")
-require("user.packer")
+require("user.keymaps_lsp")
 require("user.options")
+require("user.lazy")
 require("user.keymaps")
 require("user.highlight_yank")
 require("user.format_on_save")

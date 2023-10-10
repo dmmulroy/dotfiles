@@ -170,4 +170,5 @@ lazy.setup({
 
 	--Install nvim-ufo for better folds
 	-- { "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
+  { import = "plugins" },
 })
