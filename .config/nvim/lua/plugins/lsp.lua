@@ -2,7 +2,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost" },
-		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+		cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
 		dependencies = {
 			-- Plugin and UI to automatically install LSPs to stdpath
 			"williamboman/mason.nvim",
