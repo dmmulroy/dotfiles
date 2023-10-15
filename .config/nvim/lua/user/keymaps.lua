@@ -173,7 +173,7 @@ nnoremap("<leader>cc", ":cclose<cr>zz")
 -- Map MaximizerToggle (szw/vim-maximizer) to leader-m
 nnoremap("<leader>m", ":MaximizerToggle<cr>")
 
--- Rezie split windows to be equal size
+-- Resize split windows to be equal size
 nnoremap("<leader>=", "<C-w>=")
 
 -- Press leader f to format
