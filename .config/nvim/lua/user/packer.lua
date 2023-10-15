@@ -61,8 +61,8 @@ packer.startup(function(use)
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 
-			-- Install null-ls for diagnostics, code actions, and formatting
-			"jose-elias-alvarez/null-ls.nvim",
+			-- Install none-ls for diagnostics, code actions, and formatting
+			"nvimtools/none-ls.nvim",
 
 			-- Install neodev for better nvim configuration and plugin authoring via lsp configurations
 			"folke/neodev.nvim",
