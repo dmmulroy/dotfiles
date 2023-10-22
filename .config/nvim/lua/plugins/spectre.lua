@@ -2,7 +2,7 @@ return {
 
 	{
 		"nvim-pack/nvim-spectre",
-		event = { "BufEnter" },
+		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"catppuccin/nvim",

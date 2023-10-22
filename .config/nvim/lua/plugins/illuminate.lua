@@ -1,7 +1,7 @@
 return {
 	{
 		"RRethy/vim-illuminate",
-		event = "BufEnter",
+		lazy = true,
 		config = function()
 			require("illuminate").configure({
 				under_cursor = false,

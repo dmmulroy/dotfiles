@@ -9,8 +9,8 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 
 			"hrsh7th/cmp-nvim-lsp",
-			-- Install null-ls for diagnostics, code actions, and formatting
-			"jose-elias-alvarez/null-ls.nvim",
+			-- Install none-ls for diagnostics, code actions, and formatting
+			"nvimtools/none-ls.nvim",
 
 			-- Install neodev for better nvim configuration and plugin authoring via lsp configurations
 			"folke/neodev.nvim",
@@ -19,7 +19,7 @@ return {
 			{ "j-hui/fidget.nvim", tag = "legacy" },
 		},
 		config = function()
-			local null_ls = require("null-ls")
+			local none_ls = require("none-ls")
 			local map_lsp_keybinds = require("user.keymaps").map_lsp_keybinds -- Has to load keymaps before pluginslsp
 
 			-- Use neodev to configure lua_ls in nvim directories - must load before lspconfig
@@ -116,6 +116,7 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+			---@diagnostic disable-next-line: unused-local
 			local on_attach = function(_client, buffer_number)
 				-- Pass the current buffer to map lsp keybinds
 				map_lsp_keybinds(buffer_number)
@@ -125,7 +126,7 @@ return {
 					vim.lsp.buf.format({
 						filter = function(format_client)
 							-- Use Prettier to format TS/JS if it's available
-							return format_client.name ~= "tsserver" or not null_ls.is_registered("prettier")
+							return format_client.name ~= "tsserver" or not none_ls.is_registered("prettier")
 						end,
 					})
 				end, { desc = "LSP: Format current buffer with LSP" })
@@ -152,11 +153,11 @@ return {
 			end
 
 			-- Congifure LSP linting, formatting, diagnostics, and code actions
-			local formatting = null_ls.builtins.formatting
-			local diagnostics = null_ls.builtins.diagnostics
-			local code_actions = null_ls.builtins.code_actions
+			local formatting = none_ls.builtins.formatting
+			local diagnostics = none_ls.builtins.diagnostics
+			local code_actions = none_ls.builtins.code_actions
 
-			null_ls.setup({
+			none_ls.setup({
 				border = "rounded",
 				sources = {
 					-- formatting
