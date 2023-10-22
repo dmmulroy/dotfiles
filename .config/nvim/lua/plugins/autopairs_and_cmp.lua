@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-fields
+
 return {
 	{
 		"hrsh7th/nvim-cmp",
@@ -14,7 +16,6 @@ return {
 			"windwp/nvim-autopairs",
 		},
 		config = function()
-			--- @diagnostics disable: missing-fields
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
@@ -24,6 +25,7 @@ return {
 
 			-- Integrate nvim-autopairs with cmp
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
 			-- Load snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -73,6 +75,7 @@ return {
 				}),
 				-- Enable pictogram icons for lsp/autocompletion
 				formatting = {
+					expandable_indicator = true,
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
 						maxwidth = 50,
