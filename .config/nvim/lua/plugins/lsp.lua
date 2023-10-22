@@ -20,7 +20,7 @@ return {
 		},
 		config = function()
 			local null_ls = require("null-ls")
-			local map_lsp_keybinds = require("user.keymaps_lsp").map_lsp_keybinds -- Has to load keymaps before plugins
+			local map_lsp_keybinds = require("user.keymaps").map_lsp_keybinds -- Has to load keymaps before pluginslsp
 
 			-- Use neodev to configure lua_ls in nvim directories - must load before lspconfig
 			require("neodev").setup()
