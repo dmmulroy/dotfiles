@@ -3,6 +3,11 @@ return {
 	{
 		"nvim-pack/nvim-spectre",
 		lazy = true,
+		cmd = "Spectre",
+		keys = {
+			"<leader>S",
+			"<leader>sw",
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"catppuccin/nvim",
