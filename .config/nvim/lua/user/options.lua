@@ -71,5 +71,8 @@ vim.opt.scrolloff = 8
 -- Place a column line
 vim.opt.colorcolumn = "80"
 
+-- Always show the sign column
+vim.opt.signcolumn = "yes"
+
 -- Disable vim-kitty-navigator default mappings
 vim.g.kitty_navigator_no_mappings = 1

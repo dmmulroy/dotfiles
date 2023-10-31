@@ -60,10 +60,14 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
 -- Map neo-tree to <leader>e
-nnoremap("<leader>e", "<cmd>Neotree toggle<cr>")
+-- nnoremap("<leader>e", "<cmd>Neotree toggle<cr>")
 -- Focus on current buffer in neo-tree
-nnoremap("<leader>E", "<cmd>Neotree action=focus<cr>")
+-- nnoremap("<leader>E", "<cmd>Neotree action=focus<cr>")
 
+-- Map Oil to <leader>e
+nnoremap("<leader>e", function()
+	require("oil").toggle_float()
+end)
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
 nnoremap("<C-d>", "<C-d>zz")

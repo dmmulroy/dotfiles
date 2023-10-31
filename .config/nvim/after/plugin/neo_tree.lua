@@ -1,4 +1,4 @@
-local function _open_node(state, node)
+--[[ local function _open_node(state, node)
 	if node.type == "directory" then
 		if not node:is_expanded() then
 			require("neo-tree.sources.filesystem").toggle_directory(state, node)
@@ -58,9 +58,9 @@ require("window-picker").setup({
 			buftype = { "terminal", "quickfix" },
 		},
 	},
-})
+}) ]]
 
-require("neo-tree").setup({
+--[[ require("neo-tree").setup({
 	commands = {
 		open_or_focus_preview = open_or_focus_preview,
 		open_node = open_node,
@@ -127,4 +127,4 @@ require("neo-tree").setup({
 })
 
 -- Setup LSP file operations to enable lsp rename in neo-tree
-require("lsp-file-operations").setup()
+require("lsp-file-operations").setup() ]]
