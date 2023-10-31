@@ -18,6 +18,20 @@ symbol = " "
 [buf]
 disabled = true
 
+[custom.sapling_commit]
+command = "sl log -r . -T \"{ifeq(activebookmark, \\\"\\\", \\\"{node|short}\\\", \\\"{activebookmark}\\\")}\" | awk 'NR==1{print \"󰌪 \" $0}'"
+when = "sl show > /dev/null 2>&1; test $? -eq 0"
+style = "#a6da95"
+format = "on [$output]($style) "
+shell = ["zsh"]
+
+# [custom.saplings_status]
+# command = "sl status | awk '{symbols[\"A\"]=\"+\"; symbols[\"R\"]=\"✘\"; symbols[\"M\"]=\"!\"; symbols[\"?\"]=\"?\"; status = status symbols[$1]} END {if (status) print \"[\" status \"]\"}'"
+# when = "sl show > /dev/null 2>&1; test $? -eq 0"
+# style = "bold red"
+# format = " [$output]($style)"
+# shell = ["zsh"]
+
 [custom.kitty_layout]
 command = 'kitty @ kitten get_layout.py'
 when = ''' [ "$(kitty @ kitten get_layout.py)" = "stack" ] '''
