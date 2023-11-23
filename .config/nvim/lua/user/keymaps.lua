@@ -10,38 +10,48 @@ local utils = require("user.utils")
 
 local M = {}
 
+local TERM = os.getenv("TERM")
+
 -- Normal --
 -- Disable Space bar since it'll be used as the leader key
 nnoremap("<space>", "<nop>")
 
 -- Window +  better kitty navigation
 nnoremap("<C-j>", function()
-	if vim.fn.exists(":KittyNavigateDown") ~= 0 then
+	if vim.fn.exists(":KittyNavigateDown") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateDown()
+	elseif vim.fn.exists(":TmuxNavigateDown") ~= 0 then
+		vim.cmd.TmuxNavigateDown()
 	else
 		vim.cmd.wincmd("j")
 	end
 end)
 
 nnoremap("<C-k>", function()
-	if vim.fn.exists(":KittyNavigateUp") ~= 0 then
+	if vim.fn.exists(":KittyNavigateUp") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateUp()
+	elseif vim.fn.exists(":TmuxNavigateUp") ~= 0 then
+		vim.cmd.TmuxNavigateUp()
 	else
 		vim.cmd.wincmd("k")
 	end
 end)
 
 nnoremap("<C-l>", function()
-	if vim.fn.exists(":KittyNavigateRight") ~= 0 then
+	if vim.fn.exists(":KittyNavigateRight") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateRight()
+	elseif vim.fn.exists(":TmuxNavigateRight") ~= 0 then
+		vim.cmd.TmuxNavigateRight()
 	else
 		vim.cmd.wincmd("l")
 	end
 end)
 
 nnoremap("<C-h>", function()
-	if vim.fn.exists(":KittyNavigateLeft") ~= 0 then
+	if vim.fn.exists(":KittyNavigateLeft") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateLeft()
+	elseif vim.fn.exists(":TmuxNavigateLeft") ~= 0 then
+		vim.cmd.TmuxNavigateLeft()
 	else
 		vim.cmd.wincmd("h")
 	end
@@ -58,11 +68,6 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
-
--- Map neo-tree to <leader>e
--- nnoremap("<leader>e", "<cmd>Neotree toggle<cr>")
--- Focus on current buffer in neo-tree
--- nnoremap("<leader>E", "<cmd>Neotree action=focus<cr>")
 
 -- Map Oil to <leader>e
 nnoremap("<leader>e", function()
@@ -369,6 +374,17 @@ xnoremap("<leader>p", '"_dP')
 -- Move selected text up/down in visual mode
 vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
 vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
+
+-- Reselect the last visual selection
+xnoremap("<<", function()
+	vim.cmd("normal! <<")
+	vim.cmd("normal! gv")
+end)
+
+xnoremap(">>", function()
+	vim.cmd("normal! >>")
+	vim.cmd("normal! gv")
+end)
 
 -- Terminal --
 -- Enter normal mode while in a terminal

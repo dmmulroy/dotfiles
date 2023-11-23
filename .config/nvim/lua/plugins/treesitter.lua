@@ -1,5 +1,4 @@
 return {
-
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = function()
@@ -45,10 +44,10 @@ return {
 				autotag = {
 					enable = true,
 				},
-				context_commentstring = {
+				--[[ context_commentstring = {
 					enable = true,
 					enable_autocmd = false,
-				},
+				}, ]]
 				incremental_selection = {
 					enable = true,
 					keymaps = {

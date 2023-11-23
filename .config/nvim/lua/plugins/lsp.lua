@@ -89,7 +89,9 @@ return {
 				pyright = {},
 				solidity = {},
 				sqlls = {},
-				tailwindcss = {},
+				tailwindcss = {
+					-- filetypes = { "reason" },
+				},
 				tsserver = {
 					settings = {
 						experimental = {
