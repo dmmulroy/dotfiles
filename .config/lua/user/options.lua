@@ -75,7 +75,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes"
 
 -- Disable vim-kitty-navigator default mappings
-vim.g.kitty_navigator_no_mappings = 1
+-- vim.g.kitty_navigator_no_mappings = 1
 
 vim.opt.guicursor = {
 	"n-v-c:block", -- Normal, visual, command-line: block cursor

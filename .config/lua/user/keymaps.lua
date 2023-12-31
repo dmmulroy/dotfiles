@@ -20,8 +20,8 @@ nnoremap("<space>", "<nop>")
 nnoremap("<C-j>", function()
 	if vim.fn.exists(":KittyNavigateDown") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateDown()
-	elseif vim.fn.exists(":TmuxNavigateDown") ~= 0 then
-		vim.cmd.TmuxNavigateDown()
+	elseif vim.fn.exists(":NvimTmuxNavigateDown") ~= 0 then
+		vim.cmd.NvimTmuxNavigateDown()
 	else
 		vim.cmd.wincmd("j")
 	end
@@ -30,8 +30,8 @@ end)
 nnoremap("<C-k>", function()
 	if vim.fn.exists(":KittyNavigateUp") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateUp()
-	elseif vim.fn.exists(":TmuxNavigateUp") ~= 0 then
-		vim.cmd.TmuxNavigateUp()
+	elseif vim.fn.exists(":NvimTmuxNavigateUp") ~= 0 then
+		vim.cmd.NvimTmuxNavigateUp()
 	else
 		vim.cmd.wincmd("k")
 	end
@@ -40,8 +40,8 @@ end)
 nnoremap("<C-l>", function()
 	if vim.fn.exists(":KittyNavigateRight") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateRight()
-	elseif vim.fn.exists(":TmuxNavigateRight") ~= 0 then
-		vim.cmd.TmuxNavigateRight()
+	elseif vim.fn.exists(":NvimTmuxNavigateRight") ~= 0 then
+		vim.cmd.NvimTmuxNavigateRight()
 	else
 		vim.cmd.wincmd("l")
 	end
@@ -50,8 +50,8 @@ end)
 nnoremap("<C-h>", function()
 	if vim.fn.exists(":KittyNavigateLeft") ~= 0 and TERM == "xterm-kitty" then
 		vim.cmd.KittyNavigateLeft()
-	elseif vim.fn.exists(":TmuxNavigateLeft") ~= 0 then
-		vim.cmd.TmuxNavigateLeft()
+	elseif vim.fn.exists(":NvimTmuxNavigateLeft") ~= 0 then
+		vim.cmd.NvimTmuxNavigateLeft()
 	else
 		vim.cmd.wincmd("h")
 	end

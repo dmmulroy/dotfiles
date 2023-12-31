@@ -14,6 +14,7 @@ return {
 					"toggleterm",
 					"neo-tree",
 					"Spectre",
+					"reason",
 				},
 			})
 		end,

@@ -8,17 +8,25 @@ plugins=(git z fnm node npm yarn brew fd fzf zsh-autosuggestions zsh-syntax-high
 source $ZSH/oh-my-zsh.sh
 
 # Set bat's color theme
-export BAT_THEME="Catppuccin-macchiato"
 
 # aliases
-alias vim=nvim
 alias omzr="omz reload"
 alias c="clear"
-alias cat="bat"
 # gmo -> git merge origin
 alias gmo='git checkout $(git remote show origin | grep "HEAD branch" | cut -d " " -f5) && git pull && git checkout - && git merge $(git remote show origin | grep "HEAD branch" | cut -d " " -f5)'
 # grb -> git checkout recent branch
 alias grb='git branch --sort=-committerdate | grep -v "$(git branch --show-current)" | fzf --header "Checkout Recent Branch ( $(git branch --show-current))" --preview "git diff {1} --color=always" --pointer="" | xargs git checkout'
+# gcw -> git commit "work in progress"
+alias gcw='git commit -m "wip" --no-verify'
+# create-melange-app -> create a new melange app
+alias create-melange-app='node /Users/dillon/Code/create-melange-app/build/src/app.mjs'
+# cma -> create-melange-app
+alias cma='create-melange-app'
+# code -> open vim
+alias code="vim"
+# ks -> kill tmux server
+alias ks="tmux kill-server"
+
 
 # functions
 # fvim -> find and open a file in vim
@@ -30,45 +38,17 @@ function fvim() {
     fi
 }
 
-# kbb -> pretty print kitty key binds
-function kkb () {
-  bat --file-name "Kitty key binds" -f << EOF
-+--------------------------------+------------------+
-| Key binds                      |                  |
-+--------------------------------+------------------+
-| General                        |                  |
-| New kitty instance             | cmd + n          |
-| History                        | ctrl + r         |
-| Open URL                       | ctrl + shift + e |
-+--------------------------------+------------------+
-| Windows                        |                  |
-| New window                     | cmd + enter      |
-| Close window                   | cmd + backspace  |
-| Change window layout           | cmd + '          |
-| Resize window taller           | cmd + =          |
-| Resize window shorter          | cmd + -          |
-| Resize window wider            | cmd + 0          |
-| Resize window narrower         | cmd + 9          |
-| Reset window size              | cmd + 8          |
-| Move window up                 | shift + up       |
-| Move window down               | shift + down     |
-| Move window left               | shift + left     |
-| Move window right              | shift + right    |
-| Move to top neighboring window | ctrl + k         |
-| Move to bottom neighboring win | ctrl + j         |
-| Move to left neighboring win   | ctrl + h         |
-| Move to right neighboring win  | ctrl + l         |
-+--------------------------------+------------------+
-| Tabs                           |                  |
-| New tab                        | cmd + t          |
-| Set tab title                  | cmd + shift + i  |
-| Move tab forward               | ctrl + shift + . |
-| Move tab backward              | ctrl + shift + , |
-| Next tab                       | cmd + shift + ]  |
-| Previous tab                   | cmd + shift + [  |
-| Close tab                      | cmd + w          |
-+--------------------------------+------------------+
-EOF
+# vim -> open vim in the current directory or open the target file
+function vim() {
+    if [[ $# -eq 0 ]]; then
+        nvim .
+    else
+        nvim "$@"
+    fi
+}
+
+function ghp() {
+    echo "$1" |sed 's/\(github\)/personal.\1/'
 }
 
 # fzf
@@ -76,6 +56,9 @@ export FZF_DEFAULT_OPTS="--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-
 
 # git
 export GIT_EDITOR=nvim
+
+# sapling
+export EDITOR=nvim
 
 # gpg
 export GPG_TTY=$(tty) 
@@ -104,7 +87,20 @@ eval "$(ssh-agent -s)" > /dev/null 2>&1
 ssh-add  --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
 ssh-add  --apple-use-keychain ~/.ssh/id_ed25519_skolem > /dev/null 2>&1
 
+# direnv hook
+eval "$(direnv hook zsh)"
 
+# pnpm
+export PNPM_HOME="/Users/dillon/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/homebrew/lib/pkgconfig:/opt/homebrew/opt/zlib/lib/pkgconfig
-export LIBRARY_PATH="$(brew --prefix gcc)/lib/gcc/current:/opt/homebrew/opt/zlib/lib"
+# For compilers to find zlib you may need to set:
+export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+
+# For pkg-config to find zlib you may need to set:
+export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"

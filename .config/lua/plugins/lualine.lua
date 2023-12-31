@@ -38,18 +38,12 @@ return {
 				return string.format("󱡅 %s/%d", current_mark, total_marks)
 			end
 
-			local function kitty_component()
-				if vim.g.kitty_layout_is_stack then
-					return " "
-				end
-
-				return ""
-			end
-
 			require("lualine").setup({
 				options = {
 					theme = "catppuccin",
 					globalstatus = true,
+					component_separators = { left = "█", right = "█" },
+					section_separators = { left = "█", right = "█" },
 				},
 				sections = {
 					lualine_b = {
@@ -62,7 +56,6 @@ return {
 						{ "filename", path = 1 },
 					},
 					lualine_x = {
-						kitty_component,
 						"filetype",
 					},
 				},

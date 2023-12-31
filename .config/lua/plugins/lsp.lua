@@ -34,7 +34,7 @@ return {
 
 			-- Configure mason to auto install servers
 			require("mason-lspconfig").setup({
-				automatic_installation = { exclude = { "ocamllsp" } },
+				automatic_installation = { exclude = { "ocamllsp", "gleam" } },
 			})
 
 			-- Override tsserver diagnostics to filter out specific messages
@@ -72,6 +72,7 @@ return {
 				bashls = {},
 				-- clangd = {},
 				cssls = {},
+				gleam = {},
 				graphql = {},
 				html = {},
 				jsonls = {},
